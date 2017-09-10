@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Message Transmission
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
@@ -26,3 +27,7 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+=======
+# MsgTrans
+Angular Web App that demos network message transmission
+>>>>>>> 0c6f644f91339bf3dcf6ecf67e1b737ccca4989a
