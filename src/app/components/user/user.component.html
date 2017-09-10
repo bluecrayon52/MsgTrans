@@ -1,0 +1,158 @@
+<!-- top card group -->
+<div class="card-group">
+
+    <!-- left netowork layer card -->
+    <div class='card'>
+        <div class="card-header">
+            <small class="text-muted">Network Layers</small>
+        </div>
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
+            Application
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
+            Presentation
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
+            Session
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
+            Transport
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
+            Network
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
+            Data Link
+        </button>
+
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
+            Physical
+        </button>
+    </div>
+
+    <!-- middle card -->
+    <div class='card'>
+        <div class="card-block">
+        </div>
+    </div>
+
+    <!-- right network layer card -->
+    <div class='card'>
+        <div class="card-header">
+            <small class="text-muted">Network Layers</small>
+        </div>
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
+            Application
+        </button>
+    
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
+            Presentation
+        </button>
+    
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
+            Session
+        </button>
+    
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
+            Transport
+         </button>
+    
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
+            Network
+        </button>
+    
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
+            Data Link
+        </button>
+    
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
+            Physical
+        </button>
+    </div>
+</div>
+
+<!-- bottom card deck for router and signal  -->
+<div class='card-group'>
+
+    <div class='card'>
+        <div class="card-block">
+            <p [@myComputer]='computer1.state' (mouseenter)="animateComputer(computer1)" (mouseleave)="animateComputer(computer1)">Computer 1</p>
+        </div>
+    </div>
+
+    <div class='card'>
+            <div class="card-block">
+           </div>
+       </div>
+
+    <div class='card'>
+        <div class="card-block">
+            <p [@myRouter]='router1.state' (mouseenter)="animateRouter(router1)" (mouseleave)="animateRouter(router1)">Router 1</p>
+        </div>
+    </div> 
+
+    <!-- middle card deck  -->
+    <div class='card'>
+         <div class="card-block">
+        </div>
+    </div>
+
+    <div class='card'>
+        <div class="card-block">
+                <p [@myRouter]='router2.state' (mouseenter)="animateRouter(router2)" (mouseleave)="animateRouter(router2)">Router 2</p>
+        </div>
+    </div>
+
+    <div class='card'>
+            <div class="card-block">
+           </div>
+       </div>
+
+    <div class='card'>
+            <div class="card-block">
+                    <p [@myComputer]='computer2.state' (mouseenter)="animateComputer(computer2)" (mouseleave)="animateComputer(computer2)">Computer 2</p>
+            </div>
+    </div>
+</div>
+
+<!-- <div>
+<button class="btn btn-primary" (click)="isClicked(application)">Application:</button>
+<h3 *ngIf="application.display">{{application.message}}</h3>
+</div>
+
+<div>
+<button class="btn btn-primary" (click)="isClicked(presentation)">Presentation:</button>
+<h3 *ngIf="presentation.display">{{presentation.message}}</h3>
+</div>
+
+<div>
+<button class="btn btn-primary" (click)="isClicked(session)">Session:</button>
+<h3 *ngIf="session.display">{{session.message}}</h3>
+</div>
+
+<div>
+<button class="btn btn-primary" (click)="isClicked(transport)">Transport:</button>
+<h3 *ngIf="transport.display">{{transport.message}}</h3>
+</div>
+
+<div>
+<button class="btn btn-primary" (click)="isClicked(network)">Network:</button>
+<h3 *ngIf="network.display">{{network.message}}</h3>
+</div>
+
+<div>
+<button class="btn btn-primary" (click)="isClicked(datalink)">Data Link:</button>
+<h3 *ngIf="datalink.display">{{datalink.message}}</h3>
+</div>
+
+<div>
+<button class="btn btn-primary" (click)="isClicked(physical)">Physical:</button>
+<h3 *ngIf="physical.display">{{physical.message}}</h3>
+</div> -->
+
+  
