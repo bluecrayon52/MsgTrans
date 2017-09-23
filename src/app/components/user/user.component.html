@@ -1,11 +1,33 @@
+<div class="card">
+        <div class="title">
+          <h4 class="card-title">Message Transmission Demo</h4>
+          <h6 class="card-subtitle mb-2 text-muted">CSC 567-01</h6>
+        </div>
+      </div>
+
 <!-- top card group -->
 <div class="card-group">
 
     <!-- left netowork layer card -->
     <div class='card'>
         <div class="card-header">
-            <small class="text-muted">Network Layers</small>
-        </div>
+
+                <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+                        <input class="msgInput" type="text" formControlName="name">
+                        <input type="submit" class="btn btn-outline-secondary" value="Send" [disabled]="!rForm.valid">
+                </form>
+
+            <!-- <form #myForm="ngForm" (ngSubmit)="register(myForm)" class="example-form">     
+                <md-form-field class="example-full-width">
+                    <input mdInput #message maxlength="256" type="text"  name="myMessage" ngModal/>
+                    <md-hint align="end">{{message.value.length}} / 256</md-hint>
+                </md-form-field>
+                <input type="submit" class="btn btn-outline-secondary" value="Send" ngModal>
+                <pre>{{myForm.value | json}}</pre> 
+            </form> -->
+
+     <!-- Network Layers -->
+        </div> 
         <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} triggers="mouseenter:mouseleave" placement="right" popoverTitle="Pop title">
             Application
         </button>
@@ -38,14 +60,24 @@
     <!-- middle card -->
     <div class='card'>
         <div class="card-block">
+                <md-progress-spinner
+                class="mid-section"
+                [color]="color"
+                [mode]="mode"
+                [value]="value">
+            </md-progress-spinner>
         </div>
     </div>
 
     <!-- right network layer card -->
     <div class='card'>
-        <div class="card-header">
-            <small class="text-muted">Network Layers</small>
+        <div class="card-header">    
+            <!-- message display alert -->
+            <div *ngIf="!showMessage; else successMsg" class="placeHolder">  
+            </div> 
+            <ngb-alert *ngIf="showMessage"  class="successMsg" type="success" (close)="showMessage = false">{{name}}</ngb-alert>
         </div>
+
         <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} triggers="mouseenter:mouseleave" placement="left" popoverTitle="Pop title">
             Application
         </button>
@@ -81,78 +113,58 @@
 
     <div class='card'>
         <div class="card-block">
-            <p [@myComputer]='computer1.state' (mouseenter)="animateComputer(computer1)" (mouseleave)="animateComputer(computer1)">Computer 1</p>
+            <p class="computer" [@myComputer]='computer1.state' (mouseenter)="animateComputer(computer1)" (mouseleave)="animateComputer(computer1)">Computer 1</p>
         </div>
     </div>
 
-    <div class='card'>
+    <!-- progress bar one  -->
+    <div class='card text-center'>
             <div class="card-block">
+                    <p class="progress">
+                        <md-progress-bar mode="indeterminate"></md-progress-bar>
+                    </p>
            </div>
        </div>
 
     <div class='card'>
         <div class="card-block">
-            <p [@myRouter]='router1.state' (mouseenter)="animateRouter(router1)" (mouseleave)="animateRouter(router1)">Router 1</p>
+            <p class="router" [@myRouter]='router1.state' (mouseenter)="animateRouter(router1)" (mouseleave)="animateRouter(router1)">Router 1</p>
         </div>
     </div> 
 
-    <!-- middle card deck  -->
+    <!-- progress bar two  -->
     <div class='card'>
          <div class="card-block">
+                <p class="progress">
+                    <md-progress-bar mode="indeterminate"></md-progress-bar>
+                </p>
         </div>
     </div>
 
     <div class='card'>
         <div class="card-block">
-                <p [@myRouter]='router2.state' (mouseenter)="animateRouter(router2)" (mouseleave)="animateRouter(router2)">Router 2</p>
+                <p class="router" [@myRouter]='router2.state' (mouseenter)="animateRouter(router2)" (mouseleave)="animateRouter(router2)">Router 2</p>
         </div>
     </div>
 
+    <!-- progress bar three  -->
     <div class='card'>
             <div class="card-block">
+                 <p class="progress">
+                    <md-progress-bar mode="indeterminate"></md-progress-bar>
+                </p>
            </div>
        </div>
 
     <div class='card'>
             <div class="card-block">
-                    <p [@myComputer]='computer2.state' (mouseenter)="animateComputer(computer2)" (mouseleave)="animateComputer(computer2)">Computer 2</p>
+                    <p class="computer" [@myComputer]='computer2.state' (mouseenter)="animateComputer(computer2)" (mouseleave)="animateComputer(computer2)">Computer 2</p>
             </div>
     </div>
 </div>
 
-<!-- <div>
-<button class="btn btn-primary" (click)="isClicked(application)">Application:</button>
-<h3 *ngIf="application.display">{{application.message}}</h3>
+<!--Signal View -->
+<div class='card'>
+    Signal View Card 
 </div>
-
-<div>
-<button class="btn btn-primary" (click)="isClicked(presentation)">Presentation:</button>
-<h3 *ngIf="presentation.display">{{presentation.message}}</h3>
-</div>
-
-<div>
-<button class="btn btn-primary" (click)="isClicked(session)">Session:</button>
-<h3 *ngIf="session.display">{{session.message}}</h3>
-</div>
-
-<div>
-<button class="btn btn-primary" (click)="isClicked(transport)">Transport:</button>
-<h3 *ngIf="transport.display">{{transport.message}}</h3>
-</div>
-
-<div>
-<button class="btn btn-primary" (click)="isClicked(network)">Network:</button>
-<h3 *ngIf="network.display">{{network.message}}</h3>
-</div>
-
-<div>
-<button class="btn btn-primary" (click)="isClicked(datalink)">Data Link:</button>
-<h3 *ngIf="datalink.display">{{datalink.message}}</h3>
-</div>
-
-<div>
-<button class="btn btn-primary" (click)="isClicked(physical)">Physical:</button>
-<h3 *ngIf="physical.display">{{physical.message}}</h3>
-</div> -->
-
   

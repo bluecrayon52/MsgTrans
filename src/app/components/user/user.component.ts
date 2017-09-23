@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { NgForm } from "@angular/forms/src/forms";
+import {FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 
 @Component({
   selector: 'app-user',
@@ -29,6 +31,25 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 })
 
 export class UserComponent implements OnInit {
+
+  rForm: FormGroup;
+  post:any;                     // A property for our submitted form
+  name:string = '';
+
+  showMessage = false; 
+
+  constructor(private fb: FormBuilder) { 
+        this.rForm = fb.group({
+          'name' : [null, Validators.required],
+        });
+  }
+
+  addPost(post) {
+    this.name = post.name;
+    this.showMessage = true; 
+  }
+  
+  // turn these into objects?
   appmsg: string;
   presmsg: string;
   sessmsg: string;
@@ -36,9 +57,7 @@ export class UserComponent implements OnInit {
   netmsg: string;
   datamsg: string;
   physmsg: string;
-  address: Address;
-  hobbies: string[];
-  hello: any;
+
   public Click = false;
   application: Layer;
   presentation: Layer;
@@ -52,9 +71,14 @@ export class UserComponent implements OnInit {
   computer1: Computer;
   computer2: Computer;
 
- constructor(private dataService: DataService) {
-    console.log('constructor ran ...');
-   }
+  color = 'primary';
+  mode = 'determinate';
+  value = 50;
+  bufferValue = 75;
+
+//  constructor(private dataService: DataService) {
+//     console.log('constructor ran ...');
+//    }
 
   ngOnInit() {
     console.log('ngOnInit ran ...');
@@ -114,18 +138,21 @@ export class UserComponent implements OnInit {
       state: 'small'
     };
 
-    this.address = {
-      street: '870 W 4th St',
-      city: 'Winston-Salem',
-      state: 'NC',
-      zip: 27101
-    };
-
-    this.hobbies = ['play guitar', 'exercise', 'cooking'];
-    this.hello = 'anything';
-
   }
 
+  // register (myForm: NgForm) {
+  //   console.log('Successful registration');
+  //   this.myMessage = myForm.value; 
+  //   console.log("myMessage: "+this.myMessage); 
+  //   console.log(myForm);
+  //   console.log("myForm.value"+myForm.value);
+
+  // }  
+
+  getMessage(){
+    return this.rForm.get('name').value
+  }
+  
   animateRouter(router) {
     router.state = (router.state === 'small' ? 'large' : 'small');
   }
@@ -134,29 +161,11 @@ export class UserComponent implements OnInit {
     computer.state = (computer.state === 'small' ? 'large' : 'small');
   }
 
-  onClick() {
-    console.log('onClick ran ...');
-    this.hobbies.push('Angular');
-  }
 
   public isClicked(layer) {
     layer.display = !layer.display;
   }
 
- addHobby(hobby) {
-    console.log(hobby);
-    this.hobbies.unshift(hobby);
-    return false;
- }
-
- deleteHobby(hobby) {
-   console.log(hobby);
-   for ( let i = 0; i < this.hobbies.length; i++) {
-      if (this.hobbies[i] === hobby) {
-        this.hobbies.splice(i, 1);
-      }
-   }
- }
 }
 
 interface Address {
