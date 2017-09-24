@@ -1,14 +1,24 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
 import { NgForm } from "@angular/forms/src/forms";
 import {FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { NgbPopover } from "@ng-bootstrap/ng-bootstrap";
+import { MdProgressBar } from "@angular/material/material";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
   animations: [
+    
+    trigger('theMessage', [
+      state('hide', style({opacity:0})),
+      state('show', style({opacity:1 })),
+      transition('hide => show', animate('26000ms ease-in')),
+    ]),
+
+    // animate the routers 
     trigger('myRouter', [
       state('small', style({
         transform: 'scale(1)',
@@ -18,6 +28,8 @@ import {FormBuilder, FormGroup, Validators } from '@angular/forms';
       })),
       transition('small <=> large', animate('100ms ease-in')),
     ]),
+
+    // animate the computers 
     trigger('myComputer', [
       state('small', style({
         transform: 'scale(1)',
@@ -31,24 +43,12 @@ import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class UserComponent implements OnInit {
-
+  // input variables 
   rForm: FormGroup;
-  post:any;                     // A property for our submitted form
-  name:string = '';
+  post:any;         // A property for our submitted form
+  msg:string = '';
+  binMsg:string = '';  // holder for binary conversion 
 
-  showMessage = false; 
-
-  constructor(private fb: FormBuilder) { 
-        this.rForm = fb.group({
-          'name' : [null, Validators.required],
-        });
-  }
-
-  addPost(post) {
-    this.name = post.name;
-    this.showMessage = true; 
-  }
-  
   // turn these into objects?
   appmsg: string;
   presmsg: string;
@@ -58,7 +58,6 @@ export class UserComponent implements OnInit {
   datamsg: string;
   physmsg: string;
 
-  public Click = false;
   application: Layer;
   presentation: Layer;
   session: Layer;
@@ -71,17 +70,51 @@ export class UserComponent implements OnInit {
   computer1: Computer;
   computer2: Computer;
 
-  color = 'primary';
-  mode = 'determinate';
-  value = 50;
-  bufferValue = 75;
+  @ViewChild('a') public popApp: NgbPopover;
+  @ViewChild('b') public popPres: NgbPopover;
+  @ViewChild('c') public popSess: NgbPopover;
+  @ViewChild('d') public popTrans: NgbPopover;
+  @ViewChild('e') public popNet: NgbPopover;
+  @ViewChild('f') public popData: NgbPopover;
+  @ViewChild('g') public popPhys: NgbPopover;
 
-//  constructor(private dataService: DataService) {
-//     console.log('constructor ran ...');
-//    }
+  @ViewChild('h') public popComp: NgbPopover;
+  @ViewChild('i') public popRout: NgbPopover;
+  @ViewChild('j') public popComp2: NgbPopover;
+  @ViewChild('k') public popRout2: NgbPopover;
+
+  @ViewChild('l') public popApp2: NgbPopover;
+  @ViewChild('m') public popPres2: NgbPopover;
+  @ViewChild('n') public popSess2: NgbPopover;
+  @ViewChild('o') public popTrans2: NgbPopover;
+  @ViewChild('p') public popNet2: NgbPopover;
+  @ViewChild('q') public popData2: NgbPopover;
+  @ViewChild('r') public popPhys2: NgbPopover;
+
+  // progress bar and spinner vars 
+  color = 'primary';
+  spinMode = 'indeterminate';
+  barMode = 'indeterminate'; 
+  value = 50;
+  bufferValue = 100;
+
+  // control vars for displays  
+  showMessage:string; 
+  showSpin:string; 
+  showBars:string; 
+  
+  constructor(private fb: FormBuilder) { 
+        this.rForm = fb.group({
+          'msg' : [null, Validators.required],
+        });
+  }
 
   ngOnInit() {
     console.log('ngOnInit ran ...');
+
+    this.showMessage = 'hide'; 
+    this.showBars = 'hide'; 
+    this.showSpin = 'hide'; 
 
     this.application = {
        message: 'Application Layer',
@@ -113,9 +146,9 @@ export class UserComponent implements OnInit {
       display: false
     };
 
-    this.physical = {
+    this.physical = {             // TESTING HERE
       message: 'Physical Layer',
-      display: false
+      display: true
     };
 
     this.router1 = {
@@ -134,25 +167,26 @@ export class UserComponent implements OnInit {
     };
 
     this.computer2 = {
-      message: 'hellp from computer 2!',
+      message: 'hello from computer 2!',
       state: 'small'
     };
 
   }
 
-  // register (myForm: NgForm) {
-  //   console.log('Successful registration');
-  //   this.myMessage = myForm.value; 
-  //   console.log("myMessage: "+this.myMessage); 
-  //   console.log(myForm);
-  //   console.log("myForm.value"+myForm.value);
-
-  // }  
-
-  getMessage(){
-    return this.rForm.get('name').value
+  addPost(post) {
+    this.msg = post.msg;
+    this.rForm.reset();
+    this.convertToBin(); 
+    console.log(this.binMsg); 
+    this.startSequence(); 
   }
-  
+
+  convertToBin() {
+      for (var i=0; i < this.msg.length; i++) {
+         this.binMsg +="0"+this.msg[i].charCodeAt(0).toString(2) + " ";
+      }
+  } 
+
   animateRouter(router) {
     router.state = (router.state === 'small' ? 'large' : 'small');
   }
@@ -161,18 +195,90 @@ export class UserComponent implements OnInit {
     computer.state = (computer.state === 'small' ? 'large' : 'small');
   }
 
-
-  public isClicked(layer) {
-    layer.display = !layer.display;
+  closeMessage() {
+    this.showMessage = 'hide'; 
   }
 
-}
+  public startSequence() {
+    console.log("sequence started.....");
 
-interface Address {
-  street: string;
-  city: string;
-  state: string;
-  zip: number;
+    this.showMessage = 'show'; 
+    this.showSpin = 'show'; 
+    this.showBars = 'show'; 
+    
+    // Application Layer 
+    var thatApp = this.popApp; 
+    setTimeout((function (){thatApp.open()}), 500); 
+    setTimeout((function(){thatApp.close()}), 2000);
+
+    // Presentation Layer  
+    var thatPres = this.popPres; 
+    setTimeout((function (){thatPres.open()}), 2000); 
+    setTimeout((function(){thatPres.close()}), 3500);
+
+    // Session Layer
+    var thatSess = this.popSess; 
+    setTimeout((function (){thatSess.open()}), 3500); 
+    setTimeout((function(){thatSess.close()}), 5000); 
+
+    // Transport Layer 
+    var thatTrans = this.popTrans; 
+    setTimeout((function (){thatTrans.open()}), 5000); 
+    setTimeout((function(){thatTrans.close()}), 6500);
+
+    // Network Layer 
+    var thatNet = this.popNet; 
+    setTimeout((function (){thatNet.open()}), 6500); 
+    setTimeout((function(){thatNet.close()}), 8000);
+
+    // Data Link Layer 
+    var thatData = this.popData; 
+    setTimeout((function (){thatData.open()}), 8000);     
+    setTimeout((function(){thatData.close()}), 9500);
+
+    // Physical Layer 
+    var thatPhys = this.popPhys; 
+    setTimeout((function (){thatPhys.open()}), 9500);  
+    setTimeout((function(){thatPhys.close()}), 11000);
+
+    // skip 4500 ms
+
+    // Physical Layer 2
+    var thatPhys2 = this.popPhys2; 
+    setTimeout((function (){thatPhys2.open()}), 15500);  
+    setTimeout((function(){thatPhys2.close()}), 17000);
+
+    // Data Link Layer 2
+    var thatData2 = this.popData2; 
+    setTimeout((function (){thatData2.open()}), 17000);     
+    setTimeout((function(){thatData2.close()}), 18500);
+
+    // Network Layer 2
+    var thatNet2 = this.popNet2; 
+    setTimeout((function (){thatNet2.open()}), 18500); 
+    setTimeout((function(){thatNet2.close()}), 20000);
+
+    // Transport Layer 2
+    var thatTrans2 = this.popTrans2; 
+    setTimeout((function (){thatTrans2.open()}), 20000); 
+    setTimeout((function(){thatTrans2.close()}), 21500);
+
+    // Session Layer 2
+    var thatSess2 = this.popSess2; 
+    setTimeout((function (){thatSess2.open()}), 21500); 
+    setTimeout((function(){thatSess2.close()}), 23000); 
+
+    // Presentation Layer 2
+    var thatPres2 = this.popPres2; 
+    setTimeout((function (){thatPres2.open()}), 23000); 
+    setTimeout((function(){thatPres2.close()}), 24500);
+
+    // Application Layer 2 
+    var thatApp2 = this.popApp2; 
+    setTimeout((function (){thatApp2.open()}), 24500); 
+    setTimeout((function(){thatApp2.close()}), 26000);
+  }
+
 }
 
 interface Layer {
@@ -188,4 +294,9 @@ interface Router {
 interface Computer {
   message: string;
   state: string;
+}
+
+interface Delay {
+  show: number; 
+  hide: number; 
 }
