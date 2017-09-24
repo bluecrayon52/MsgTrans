@@ -70,9 +70,9 @@
         <div class="card-header">    
 
             <!-- message display alert -->
-            <div *ngIf="showMessage ; else successMsg" class="placeHolder">  
+            <div *ngIf="!message.shown ; else successMsg" class="placeHolder">  
             </div> 
-            <ngb-alert [@theMessage]="showMessage"  class="successMsg fade in" type="success" (close)="closeMessage()">{{msg}}</ngb-alert>
+            <ngb-alert [@theMessage]="message.state"  class="successMsg" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
 
         </div>
 

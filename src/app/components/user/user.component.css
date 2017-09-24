@@ -53,12 +53,12 @@
   width: 75%;
 }
 
-.successMsg {
+/* .successMsg {
   position: absolute;
-  /* background-color: #000000;
-  background-image: none; */
+  background-color: #000000;
+  background-image: none; 
   opacity: 0.0;
-  /* filter: alpha(opacity=50); */
+  filter: alpha(opacity=50);
   z-index: 2;
-  transition: 10s;
-}
+  transition: 20s;
+} */

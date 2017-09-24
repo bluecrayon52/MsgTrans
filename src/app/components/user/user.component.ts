@@ -13,9 +13,9 @@ import { MdProgressBar } from "@angular/material/material";
   animations: [
     
     trigger('theMessage', [
-      state('hide', style({opacity:0})),
-      state('show', style({opacity:1 })),
-      transition('hide => show', animate('26000ms ease-in')),
+      state('hide', style({opacity:0, position:'absolute'})),
+      state('show', style({opacity:1})),
+      transition('hide => show', animate('100ms ease-in')),
     ]),
 
     // animate the routers 
@@ -46,7 +46,6 @@ export class UserComponent implements OnInit {
   // input variables 
   rForm: FormGroup;
   post:any;         // A property for our submitted form
-  msg:string = '';
   binMsg:string = '';  // holder for binary conversion 
 
   // turn these into objects?
@@ -69,6 +68,7 @@ export class UserComponent implements OnInit {
   router2: Router;
   computer1: Computer;
   computer2: Computer;
+  message: Message; 
 
   @ViewChild('a') public popApp: NgbPopover;
   @ViewChild('b') public popPres: NgbPopover;
@@ -98,11 +98,7 @@ export class UserComponent implements OnInit {
   value = 50;
   bufferValue = 100;
 
-  // control vars for displays  
-  showMessage:string; 
-  showSpin:string; 
-  showBars:string; 
-  
+
   constructor(private fb: FormBuilder) { 
         this.rForm = fb.group({
           'msg' : [null, Validators.required],
@@ -111,10 +107,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     console.log('ngOnInit ran ...');
-
-    this.showMessage = 'hide'; 
-    this.showBars = 'hide'; 
-    this.showSpin = 'hide'; 
 
     this.application = {
        message: 'Application Layer',
@@ -171,10 +163,16 @@ export class UserComponent implements OnInit {
       state: 'small'
     };
 
+    this.message = {
+      payload: '',
+      state: 'hide', 
+      shown: false 
+    };
+
   }
 
   addPost(post) {
-    this.msg = post.msg;
+    this.message.payload = post.msg;
     this.rForm.reset();
     this.convertToBin(); 
     console.log(this.binMsg); 
@@ -182,8 +180,8 @@ export class UserComponent implements OnInit {
   }
 
   convertToBin() {
-      for (var i=0; i < this.msg.length; i++) {
-         this.binMsg +="0"+this.msg[i].charCodeAt(0).toString(2) + " ";
+      for (var i=0; i < this.message.payload.length; i++) {
+         this.binMsg +="0"+this.message.payload[i].charCodeAt(0).toString(2) + " ";
       }
   } 
 
@@ -195,16 +193,21 @@ export class UserComponent implements OnInit {
     computer.state = (computer.state === 'small' ? 'large' : 'small');
   }
 
-  closeMessage() {
-    this.showMessage = 'hide'; 
+  openMessage(msg){
+    msg.state = 'show';
+    msg.shown = true; 
+  }
+
+  closeMessage(msg) {
+   msg.state = 'hide'; 
+   msg.shown = false; 
   }
 
   public startSequence() {
     console.log("sequence started.....");
 
-    this.showMessage = 'show'; 
-    this.showSpin = 'show'; 
-    this.showBars = 'show'; 
+    // this.showSpin = 'show'; 
+    // this.showBars = 'show'; 
     
     // Application Layer 
     var thatApp = this.popApp; 
@@ -277,6 +280,10 @@ export class UserComponent implements OnInit {
     var thatApp2 = this.popApp2; 
     setTimeout((function (){thatApp2.open()}), 24500); 
     setTimeout((function(){thatApp2.close()}), 26000);
+
+    var thatMsg = this.message; 
+    setTimeout((function (){thatMsg.state='show';
+      thatMsg.shown = true; }), 26000); 
   }
 
 }
@@ -299,4 +306,10 @@ interface Computer {
 interface Delay {
   show: number; 
   hide: number; 
+}
+
+interface Message {
+  payload: string; 
+  state: string; 
+  shown: boolean; 
 }
