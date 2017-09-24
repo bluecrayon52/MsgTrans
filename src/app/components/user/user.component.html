@@ -20,31 +20,38 @@
 
         </div> 
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} #a="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} #a="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popApp)" (mouseleave)="popClose(popApp)">
             Application
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} #b="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} #b="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popPres)" (mouseleave)="popClose(popPres)">
             Presentation
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} #c="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} #c="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popSess)" (mouseleave)="popClose(popSess)">
             Session
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} #d="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} #d="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popTrans)" (mouseleave)="popClose(popTrans)">
             Transport
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} #e="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} #e="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popNet)" (mouseleave)="popClose(popNet)">
             Network
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} #f="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} #f="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popData)" (mouseleave)="popClose(popData)">
             Data Link
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} #g="ngbPopover" triggers="manual" placement="right" popoverTitle="Testing One Two">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} #g="ngbPopover" triggers="manual" placement="right" popoverTitle="Testing One Two"
+        (mouseenter)="popOpen(popPhys)" (mouseleave)="popClose(popPhys)">
             Physical
         </button>
     </div>
@@ -55,7 +62,7 @@
         <!-- progress spinner  -->
         <div class="card-block">
                 <md-progress-spinner
-                *ngIf="showSpin;"
+                *ngIf="progSpin.shown"
                 class="progressSpin"
                 [color]="color"
                 [mode]="spinMode"
@@ -72,35 +79,42 @@
             <!-- message display alert -->
             <div *ngIf="!message.shown ; else successMsg" class="placeHolder">  
             </div> 
-            <ngb-alert [@theMessage]="message.state"  class="successMsg" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
+            <ngb-alert *ngIf="message.shown"  class="successMsg" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
 
         </div>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} #l="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} #l="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popApp2)" (mouseleave)="popClose(popApp2)">
             Application
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} #m="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} #m="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popPres2)" (mouseleave)="popClose(popPres2)">
             Presentation
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} #n="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} #n="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popSess2)" (mouseleave)="popClose(popSess2)">
             Session
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} #o="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} #o="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popTrans2)" (mouseleave)="popClose(popTrans2)">
             Transport
          </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} #p="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} #p="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popNet2)" (mouseleave)="popClose(popNet2)">
             Network
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} #q="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} #q="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popData2)" (mouseleave)="popClose(popData2)">
             Data Link
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} #r="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title">
+        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} #r="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        (mouseenter)="popOpen(popPhys2)" (mouseleave)="popClose(popPhys2)">
             Physical
         </button>
     </div>
@@ -119,7 +133,7 @@
     <div class='card text-center'>
             <div class="card-block">
                     <p class="progressBar">
-                        <md-progress-bar class='bar' [mode]="barMode"></md-progress-bar>
+                        <md-progress-bar *ngIf="progBar1.shown" class='bar' [mode]="barMode"></md-progress-bar>
                     </p>
            </div>
        </div>
@@ -134,7 +148,7 @@
     <div class='card'>
          <div class="card-block">
                 <p class="progressBar">
-                    <md-progress-bar class='bar' [mode]="barMode"></md-progress-bar>
+                    <md-progress-bar *ngIf="progBar2.shown" class='bar' [mode]="barMode"></md-progress-bar>
                 </p>
         </div>
     </div>
@@ -149,7 +163,7 @@
     <div class='card'>
             <div class="card-block">
                  <p class="progressBar">
-                    <md-progress-bar class='bar' [mode]="barMode"></md-progress-bar>
+                    <md-progress-bar *ngIf="progBar3.shown" class='bar' [mode]="barMode"></md-progress-bar>
                 </p>
            </div>
        </div>

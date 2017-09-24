@@ -12,12 +12,6 @@ import { MdProgressBar } from "@angular/material/material";
   styleUrls: ['./user.component.css'],
   animations: [
     
-    trigger('theMessage', [
-      state('hide', style({opacity:0, position:'absolute'})),
-      state('show', style({opacity:1})),
-      transition('hide => show', animate('100ms ease-in')),
-    ]),
-
     // animate the routers 
     trigger('myRouter', [
       state('small', style({
@@ -69,6 +63,10 @@ export class UserComponent implements OnInit {
   computer1: Computer;
   computer2: Computer;
   message: Message; 
+  progBar1: Progress; 
+  progBar2: Progress; 
+  progBar3: Progress;
+  progSpin: Progress;
 
   @ViewChild('a') public popApp: NgbPopover;
   @ViewChild('b') public popPres: NgbPopover;
@@ -164,11 +162,26 @@ export class UserComponent implements OnInit {
     };
 
     this.message = {
-      payload: '',
-      state: 'hide', 
+      payload: '', 
       shown: false 
     };
 
+    this.progBar1 = {
+      shown: false
+    }; 
+
+    this.progBar2 = {
+      shown: false 
+    }; 
+
+    this.progBar3 = {
+      shown: false 
+    }; 
+
+    this.progSpin = {
+      shown: false 
+    }; 
+    
   }
 
   addPost(post) {
@@ -193,22 +206,28 @@ export class UserComponent implements OnInit {
     computer.state = (computer.state === 'small' ? 'large' : 'small');
   }
 
-  openMessage(msg){
-    msg.state = 'show';
-    msg.shown = true; 
-  }
-
   closeMessage(msg) {
-   msg.state = 'hide'; 
    msg.shown = false; 
   }
 
+  popOpen(popup) {
+    if (this.message.shown){
+      popup.open(); 
+    }
+  }
+
+  popClose(popup) {
+    if (this.message.shown){
+      popup.close();
+    } 
+  }
+  
   public startSequence() {
     console.log("sequence started.....");
 
-    // this.showSpin = 'show'; 
-    // this.showBars = 'show'; 
-    
+    var thatSpin= this.progSpin; 
+    setTimeout((function (){thatSpin.shown = true; }), 200);  
+
     // Application Layer 
     var thatApp = this.popApp; 
     setTimeout((function (){thatApp.open()}), 500); 
@@ -244,8 +263,21 @@ export class UserComponent implements OnInit {
     setTimeout((function (){thatPhys.open()}), 9500);  
     setTimeout((function(){thatPhys.close()}), 11000);
 
-    // skip 4500 ms
+    // progress bar 1 
+    var thatBar1 = this.progBar1; 
+    setTimeout((function (){thatBar1.shown = true; }), 11000);  
+    setTimeout((function(){thatBar1.shown = false; }), 12500);
 
+    // progress bar 2
+    var thatBar2 = this.progBar2; 
+    setTimeout((function (){thatBar2.shown = true; }), 12500);  
+    setTimeout((function(){thatBar2.shown = false; }), 14000);
+
+    // progress bar 3 
+    var thatBar3 = this.progBar3; 
+    setTimeout((function (){thatBar3.shown = true; }), 14000);  
+    setTimeout((function(){thatBar3.shown = false; }), 15500);
+  
     // Physical Layer 2
     var thatPhys2 = this.popPhys2; 
     setTimeout((function (){thatPhys2.open()}), 15500);  
@@ -282,8 +314,9 @@ export class UserComponent implements OnInit {
     setTimeout((function(){thatApp2.close()}), 26000);
 
     var thatMsg = this.message; 
-    setTimeout((function (){thatMsg.state='show';
-      thatMsg.shown = true; }), 26000); 
+    setTimeout((function (){thatMsg.shown = true; }), 26000); 
+
+    setTimeout((function (){thatSpin.shown = false; }), 26000); 
   }
 
 }
@@ -310,6 +343,9 @@ interface Delay {
 
 interface Message {
   payload: string; 
-  state: string; 
+  shown: boolean; 
+}
+
+interface Progress { 
   shown: boolean; 
 }
