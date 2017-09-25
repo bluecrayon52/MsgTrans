@@ -53,6 +53,9 @@
   width: 75%;
 }
 
+.nowrap {
+  white-space: pre ;
+}
 /* .successMsg {
   position: absolute;
   background-color: #000000;

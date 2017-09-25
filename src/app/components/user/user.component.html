@@ -20,37 +20,79 @@
 
         </div> 
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} #a="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+            <ng-template #applicationContent>
+                <p>
+                <span class="nowrap">{{application.message}}</span>
+                </p>
+            </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #a="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
         (mouseenter)="popOpen(popApp)" (mouseleave)="popClose(popApp)">
             Application
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} #b="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+            <ng-template #presentationContent>
+                <p>
+                <span class="nowrap">{{presentation.message}}</span>
+                </p>
+            </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent" #b="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
         (mouseenter)="popOpen(popPres)" (mouseleave)="popClose(popPres)">
             Presentation
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} #c="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+            <ng-template #sessionContent>
+                <p>
+                <span class="nowrap">{{session.message}}</span>
+                </p>
+            </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent" #c="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
         (mouseenter)="popOpen(popSess)" (mouseleave)="popClose(popSess)">
             Session
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} #d="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+            <ng-template #transportContent>
+                <p>
+                <span class="nowrap">{{transport.message}}</span>
+                </p>
+            </ng-template>
+        
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent" #d="ngbPopover" triggers="manual" placement="right" popoverTitle="Segments"
         (mouseenter)="popOpen(popTrans)" (mouseleave)="popClose(popTrans)">
             Transport
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} #e="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+            <ng-template #networkContent>
+                <p>
+                <span class="nowrap">{{network.message}}</span>
+                </p>
+            </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent" #e="ngbPopover" triggers="manual" placement="right" popoverTitle="Packets"
         (mouseenter)="popOpen(popNet)" (mouseleave)="popClose(popNet)">
             Network
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} #f="ngbPopover" triggers="manual" placement="right" popoverTitle="Pop title"
+            <ng-template #datalinkContent>
+                <p>
+                <span class="nowrap">[Preamble][SFD][Destination Address][Source Address][Length/Type][{{datalink.message}}][CRC]</span>
+                </p>
+            </ng-template>
+    
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent" #f="ngbPopover" triggers="manual" placement="right" popoverTitle="Frames"
         (mouseenter)="popOpen(popData)" (mouseleave)="popClose(popData)">
             Data Link
         </button>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} #g="ngbPopover" triggers="manual" placement="right" popoverTitle="Testing One Two"
+            <ng-template #physicalContent>
+                <p>
+                <span class="nowrap">{{physical.message}}</span>
+                </p>
+            </ng-template>
+    
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent" #g="ngbPopover" triggers="manual" placement="right" popoverTitle="Bits"
         (mouseenter)="popOpen(popPhys)" (mouseleave)="popClose(popPhys)">
             Physical
         </button>
@@ -79,41 +121,41 @@
             <!-- message display alert -->
             <div *ngIf="!message.shown ; else successMsg" class="placeHolder">  
             </div> 
-            <ngb-alert *ngIf="message.shown"  class="successMsg" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
+            <ngb-alert *ngIf="message.shown" class="successMsg" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
 
         </div>
 
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{application.message}} #l="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #l="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
         (mouseenter)="popOpen(popApp2)" (mouseleave)="popClose(popApp2)">
             Application
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{presentation.message}} #m="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent" #m="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
         (mouseenter)="popOpen(popPres2)" (mouseleave)="popClose(popPres2)">
             Presentation
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{session.message}} #n="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent" #n="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
         (mouseenter)="popOpen(popSess2)" (mouseleave)="popClose(popSess2)">
             Session
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{transport.message}} #o="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent" #o="ngbPopover" triggers="manual" placement="left" popoverTitle="Segments"
         (mouseenter)="popOpen(popTrans2)" (mouseleave)="popClose(popTrans2)">
             Transport
          </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{network.message}} #p="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent" #p="ngbPopover" triggers="manual" placement="left" popoverTitle="Packets"
         (mouseenter)="popOpen(popNet2)" (mouseleave)="popClose(popNet2)">
             Network
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{datalink.message}} #q="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent" #q="ngbPopover" triggers="manual" placement="left" popoverTitle="Frames"
         (mouseenter)="popOpen(popData2)" (mouseleave)="popClose(popData2)">
             Data Link
         </button>
     
-        <button type="button" class="btn btn-outline-secondary" ngbPopover={{physical.message}} #r="ngbPopover" triggers="manual" placement="left" popoverTitle="Pop title"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent" #r="ngbPopover" triggers="manual" placement="left" popoverTitle="Bits"
         (mouseenter)="popOpen(popPhys2)" (mouseleave)="popClose(popPhys2)">
             Physical
         </button>
@@ -125,7 +167,7 @@
 
     <div class='card'>
         <div class="card-block">
-            <p class="computer" [@myComputer]='computer1.state' (mouseenter)="animateComputer(computer1)" (mouseleave)="animateComputer(computer1)">Computer 1</p>
+            <p class="computer" [@myComputer]='computer1.state' (mouseenter)="animateComputer(computer1)" (mouseleave)="animateComputer(computer1)">Modulator</p>
         </div>
     </div>
 
@@ -170,13 +212,14 @@
 
     <div class='card'>
             <div class="card-block">
-                    <p class="computer" [@myComputer]='computer2.state' (mouseenter)="animateComputer(computer2)" (mouseleave)="animateComputer(computer2)">Computer 2</p>
+                    <p class="computer" [@myComputer]='computer2.state' (mouseenter)="animateComputer(computer2)" (mouseleave)="animateComputer(computer2)">Demodulator</p>
             </div>
     </div>
 </div>
 
 <!--Signal View -->
-<div class='card'>
-    Signal View Card 
+<div *ngIf="progBar1.shown || progBar2.shown || progBar3.shown" class='card'>
+    {{binMsg}}
+   <app-signal></app-signal>
 </div>
   

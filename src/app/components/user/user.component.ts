@@ -132,13 +132,13 @@ export class UserComponent implements OnInit {
     };
 
     this.datalink = {
-      message: 'Data Link Layer',
+      message: 'Data and Padding',   // TESTING HERE
       display: false
     };
 
-    this.physical = {             // TESTING HERE
+    this.physical = {             
       message: 'Physical Layer',
-      display: true
+      display: false 
     };
 
     this.router1 = {
@@ -190,6 +190,12 @@ export class UserComponent implements OnInit {
     this.convertToBin(); 
     console.log(this.binMsg); 
     this.startSequence(); 
+    this.datalink.message = this.binMsg; 
+    this.physical.message = this.binMsg;
+    this.application.message = this.message.payload;
+    this.session.message = this.message.payload; 
+    this.transport.message = this.message.payload;
+    this.network.message = this.message.payload; 
   }
 
   convertToBin() {
@@ -211,15 +217,15 @@ export class UserComponent implements OnInit {
   }
 
   popOpen(popup) {
-    if (this.message.shown){
+    // if (this.message.shown){
       popup.open(); 
-    }
+    // }
   }
 
   popClose(popup) {
-    if (this.message.shown){
+    // if (this.message.shown){
       popup.close();
-    } 
+    // } 
   }
   
   public startSequence() {
