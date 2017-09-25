@@ -193,6 +193,7 @@ export class UserComponent implements OnInit {
     this.datalink.message = this.binMsg; 
     this.physical.message = this.binMsg;
     this.application.message = this.message.payload;
+    this.presentation.message = this.message.payload; 
     this.session.message = this.message.payload; 
     this.transport.message = this.message.payload;
     this.network.message = this.message.payload; 

@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
+import { SignalComponent } from './components/signal/signal.component';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DataService } from './services/data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +16,8 @@ import {MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerMod
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    SignalComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,6 @@ import {MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerMod
     [MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule] //Material Imports 
   ],
   providers: [DataService],
-  bootstrap: [AppComponent, UserComponent]
+  bootstrap: [AppComponent, UserComponent, SignalComponent]
 })
 export class AppModule { }

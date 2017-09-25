@@ -1,7 +1,26 @@
 
 # MsgTrans (Message Transmission)   
 Angular Web App that demos network message transmission   
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.  
+
+## Functionality and Notes: 
+This application takes in a string that the user inputs and triggers a simulation of traversing the 7 layers of the OSI (Open System Interconnection) model.
+The string is converted to binary and this binary, which is currently only displayed at the data link and physical layers (at least for now).  After three progress bars signifying signal transmission completes, the simulation continues back up the 7 layers of the other modeled machine.  The message is finally displayed as if it had reach the application layer of the targeted address.  
+
+## What is Missing:
+The encapsulation that takes place ate each level needs to be more thoroughly modeled.  The decision to use popover windows to display these various encapsulations has proven less than optimal and limiting in terms of extensibility and formatting.  
+
+There should be a digital binary signal displayed after the binary message leaves the physical layer and before the modulator begins to function.  
+
+An analog signal should be displayed from the modulator to the demodulator using binary frequency shift keying to display a sine wave of the appropriate modulation.  
+
+## Bugs: 
+For a currently unkown reason, the binary translation of the first string passed in does not get reset to the next string being passed in, therefore it is nessecary to refresh the browser screen before each iteration in order to view the correct binary translation of the message. 
+
+## Node Modules 
+Several modules where installed via the npm (node project manager).  These module dependancies are not included in this repo, therefore it will be necessary to install them locally to run this application.  
+
+
 
 ## Development server
 
