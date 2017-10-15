@@ -1,23 +1,78 @@
-<div [ngSwitch]="layer"  class='card'>
-  <div class='card' *ngSwitchCase="'application'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'presentation'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'session'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'transport'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'network'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'data_link'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'physical'">{{layer}}</div>
+<div [ngSwitch]="layer.name"  class='card'>
 
-  <div class='card' *ngSwitchCase="'signal_1'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'signal_2'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'signal_3'">{{layer}}</div>
+    <div class='card' *ngSwitchCase="'application'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
 
-  <div class='card' *ngSwitchCase="'application2'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'presentation2'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'session2'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'transport2'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'network2'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'data_link2'">{{layer}}</div>
-  <div class='card' *ngSwitchCase="'physical2'">{{layer}}</div>
+    <div class='card' *ngSwitchCase="'presentation'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'session'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'transport'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'network'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'data_link'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'physical'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'application2'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'presentation2'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'session2'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'transport2'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'network2'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'data_link2'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'physical2'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
   
-  <div class='card' *ngSwitchCase="'default'">{{layer}}</div>
+    <div class='card' *ngSwitchCase="'default'">
+      <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p>
+    </div>
+    
 </div>

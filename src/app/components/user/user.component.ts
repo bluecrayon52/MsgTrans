@@ -54,8 +54,8 @@ export class UserComponent implements OnInit {
   datamsg: string;
   physmsg: string;
 
-  layer: string; // keep track of layer iengagement across components 
-
+  layer: object; // keep track of layer iengagement across components 
+  default: object; 
   application: Layer;
   presentation: Layer;
   session: Layer;
@@ -63,6 +63,19 @@ export class UserComponent implements OnInit {
   network: Layer;
   datalink: Layer;
   physical: Layer;
+
+  signal_1: Layer;
+  signal_2: Layer;
+  signal_3: Layer;
+  
+  application2: Layer;
+  presentation2: Layer;
+  session2: Layer;
+  transport2: Layer;
+  network2: Layer;
+  datalink2: Layer;
+  physical2: Layer;
+
   router1: Router;
   router2: Router;
   computer1: Computer;
@@ -113,6 +126,8 @@ export class UserComponent implements OnInit {
     console.log('ngOnInit ran ...');
 
     this.data.currentLayer.subscribe(layer => this.layer = layer) // subscribe to the service 
+    
+    this.default = this.layer; 
 
     this.application = {
       name: 'application', 
@@ -147,6 +162,56 @@ export class UserComponent implements OnInit {
     this.physical = { 
       name: 'physical',            
       message: 'Physical Layer',
+    };
+
+    this.signal_1 = { 
+      name: 'signal_1',            
+      message: 'Signal One',
+    };
+
+    this.signal_2 = { 
+      name: 'signal_2',            
+      message: 'Signal Two',
+    };
+
+    this.signal_3 = { 
+      name: 'signal_3',            
+      message: 'Signal Three',
+    };
+
+    this.application2 = {
+      name: 'application2', 
+       message: 'Application Layer 2'
+    };
+
+    this.presentation2 = {
+      name: 'presentation2',
+      message: 'Presentation Layer 2'
+    };
+
+    this.session2 = {
+      name: 'session2',
+      message: 'Session Layer 2',
+    };
+
+    this.transport2 = {
+      name: 'transport2',
+      message: 'Tranport Layer 2',
+    };
+
+    this.network2 = {
+      name: 'network2',
+      message: 'Network Layer 2',
+    };
+
+    this.datalink2 = {
+      name: 'data_link2',
+      message: 'Data Link Layer 2',   // TESTING HERE
+    };
+
+    this.physical2 = { 
+      name: 'physical2',            
+      message: 'Physical Layer 2',
     };
 
     this.router1 = {
@@ -192,27 +257,47 @@ export class UserComponent implements OnInit {
     
   }
 
-  diffLayer(layer:string){
+  diffLayer(layer:object){
     this.data.changeLayer(layer)
   }
 
   addPost(post) {
+
+    // reset binary message 
+    this.binMsg = ''; 
+
     this.message.payload = post.msg;
     this.rForm.reset();
     this.convertToBin(); 
     console.log(this.binMsg);  
     this.startSequence(); 
+
+    this.signal_1.message = this.binMsg;
+    this.signal_2.message = this.binMsg;
+    this.signal_3.message = this.binMsg; 
+
     this.datalink.message = this.binMsg; 
     this.physical.message = this.binMsg;
+
+    this.datalink2.message = this.binMsg; 
+    this.physical2.message = this.binMsg;
+
     this.application.message = this.message.payload;
     this.presentation.message = this.message.payload; 
     this.session.message = this.message.payload; 
     this.transport.message = this.message.payload;
     this.network.message = this.message.payload; 
+
+    this.application2.message = this.message.payload;
+    this.presentation2.message = this.message.payload; 
+    this.session2.message = this.message.payload; 
+    this.transport2.message = this.message.payload;
+    this.network2.message = this.message.payload; 
+
   }
 
-  convertToBin() {
-      for (var i=0; i < this.message.payload.length; i++) {
+  convertToBin() { 
+    for (var i = 0; i < this.message.payload.length; i++) {
          this.binMsg +="0"+this.message.payload[i].charCodeAt(0).toString(2) + " ";
       }
   } 
@@ -244,14 +329,16 @@ export class UserComponent implements OnInit {
   public startSequence() {
     console.log("sequence started.....");
 
+    // progress spinner on 
     var thatSpin= this.progSpin; 
     setTimeout((function (){thatSpin.shown = true; }), 200);  
 
+    // scope anchor 
     var that = this; 
 
     // Application Layer 
     var appView = function(){
-      that.diffLayer('application');
+      that.diffLayer(that.application);
     }
     var thatApp = this.popApp; 
     setTimeout((() => {thatApp.open(); appView();}), 500); 
@@ -259,7 +346,7 @@ export class UserComponent implements OnInit {
 
     // Presentation Layer  
     var presView = function(){
-      that.diffLayer('presentation');
+      that.diffLayer(that.presentation);
     }
     var thatPres = this.popPres; 
     setTimeout((function (){thatPres.open(); presView();}), 2000); 
@@ -267,7 +354,7 @@ export class UserComponent implements OnInit {
 
     // Session Layer
     var sessView = function(){
-      that.diffLayer('session');
+      that.diffLayer(that.session);
     }
     var thatSess = this.popSess; 
     setTimeout((function (){thatSess.open(); sessView();}), 3500); 
@@ -275,7 +362,7 @@ export class UserComponent implements OnInit {
 
     // Transport Layer 
     var transView = function(){
-      that.diffLayer('transport');
+      that.diffLayer(that.transport);
     }
     var thatTrans = this.popTrans; 
     setTimeout((function (){thatTrans.open(); transView();}), 5000); 
@@ -283,7 +370,7 @@ export class UserComponent implements OnInit {
 
     // Network Layer 
     var netView = function(){
-      that.diffLayer('network');
+      that.diffLayer(that.network);
     }
     var thatNet = this.popNet; 
     setTimeout((function (){thatNet.open(); netView();}), 6500); 
@@ -291,7 +378,7 @@ export class UserComponent implements OnInit {
 
     // Data Link Layer 
     var dlView = function(){
-      that.diffLayer('data_link');
+      that.diffLayer(that.datalink);
     }
     var thatData = this.popData; 
     setTimeout((function (){thatData.open(); dlView();}), 8000);     
@@ -299,7 +386,7 @@ export class UserComponent implements OnInit {
 
     // Physical Layer 
     var physView = function(){
-      that.diffLayer('physical');
+      that.diffLayer(that.physical);
     }
     var thatPhys = this.popPhys; 
     setTimeout((function (){thatPhys.open(); physView();}), 9500);  
@@ -307,7 +394,7 @@ export class UserComponent implements OnInit {
 
     // progress bar 1 
     var sigView1 = function(){
-      that.diffLayer('signal_1');
+      that.diffLayer(that.signal_1);
     }
     var thatBar1 = this.progBar1; 
     setTimeout((function (){thatBar1.shown = true; sigView1();}), 11000);  
@@ -315,7 +402,7 @@ export class UserComponent implements OnInit {
 
     // progress bar 2
     var sigView2 = function(){
-      that.diffLayer('signal_2');
+      that.diffLayer(that.signal_2);
     }
     var thatBar2 = this.progBar2; 
     setTimeout((function (){thatBar2.shown = true; sigView2(); }), 12500);  
@@ -323,7 +410,7 @@ export class UserComponent implements OnInit {
 
     // progress bar 3 
     var sigView3 = function(){
-      that.diffLayer('signal_3');
+      that.diffLayer(that.signal_3);
     }
     var thatBar3 = this.progBar3; 
     setTimeout((function (){thatBar3.shown = true; sigView3();}), 14000);  
@@ -331,7 +418,7 @@ export class UserComponent implements OnInit {
   
     // Physical Layer 2
     var physView2 = function(){
-      that.diffLayer('physical2');
+      that.diffLayer(that.physical2);
     }
     var thatPhys2 = this.popPhys2; 
     setTimeout((function (){thatPhys2.open(); physView2();}), 15500);  
@@ -339,7 +426,7 @@ export class UserComponent implements OnInit {
 
     // Data Link Layer 2
     var dlView2 = function(){
-      that.diffLayer('data_link2');
+      that.diffLayer(that.datalink2);
     }
     var thatData2 = this.popData2; 
     setTimeout((function (){thatData2.open(); dlView2();}), 17000);     
@@ -347,7 +434,7 @@ export class UserComponent implements OnInit {
 
     // Network Layer 2
     var netView2 = function(){
-      that.diffLayer('network2');
+      that.diffLayer(that.network2);
     }
     var thatNet2 = this.popNet2; 
     setTimeout((function (){thatNet2.open(); netView2();}), 18500); 
@@ -355,7 +442,7 @@ export class UserComponent implements OnInit {
 
     // Transport Layer 2
     var transView2= function(){
-      that.diffLayer('transport2');
+      that.diffLayer(that.transport2);
     }
     var thatTrans2 = this.popTrans2; 
     setTimeout((function (){thatTrans2.open(); transView2();}), 20000); 
@@ -363,7 +450,7 @@ export class UserComponent implements OnInit {
 
     // Session Layer 2
     var sessView2 = function(){
-      that.diffLayer('session2');
+      that.diffLayer(that.session2);
     }
     var thatSess2 = this.popSess2; 
     setTimeout((function (){thatSess2.open(); sessView2();}), 21500); 
@@ -371,7 +458,7 @@ export class UserComponent implements OnInit {
 
     // Presentation Layer 2
     var presView2 = function(){
-      that.diffLayer('presentation2');
+      that.diffLayer(that.presentation2);
     }
     var thatPres2 = this.popPres2; 
     setTimeout((function (){thatPres2.open(); presView2();}), 23000); 
@@ -379,15 +466,20 @@ export class UserComponent implements OnInit {
 
     // Application Layer 2 
     var appView2 = function(){
-      that.diffLayer('application2');
+      that.diffLayer(that.application2);
     }
     var thatApp2 = this.popApp2; 
     setTimeout((function (){thatApp2.open(); appView2();}), 24500); 
     setTimeout((function(){thatApp2.close()}), 26000);
 
+    // Message Recieved 
+    var defaultView = function(){
+      that.diffLayer(that.default);
+    }
     var thatMsg = this.message; 
-    setTimeout((function (){thatMsg.shown = true; }), 26000); 
+    setTimeout((function (){thatMsg.shown = true; defaultView();}), 26000); 
 
+    // progress spinner off 
     setTimeout((function (){thatSpin.shown = false; }), 26000); 
   } 
 

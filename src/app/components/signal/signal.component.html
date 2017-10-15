@@ -1,1 +1,18 @@
-<p> Signal Works! </p>
+<div [ngSwitch]="layer.name"  class='card'>
+
+    <div class='card' *ngSwitchCase="'signal_1'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}<p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'signal_2'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}<p>
+    </div>
+
+    <div class='card' *ngSwitchCase="'signal_3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}<p>
+    </div>
+    
+</div>

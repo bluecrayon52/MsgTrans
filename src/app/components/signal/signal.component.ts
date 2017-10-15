@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LayerSyncService} from '../../services/layer-sync.service';
 
 @Component({
   selector: 'app-signal',
@@ -7,14 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class SignalComponent implements OnInit {
-    
-  constructor() { 
+   
+  layer: object; 
   
-  }
+  constructor(private data: LayerSyncService) { }
 
   ngOnInit() {
-
-  }
- 
+    this.data.currentLayer.subscribe(layer => this.layer = layer)
+  } 
 }
 

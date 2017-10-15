@@ -6,9 +6,10 @@ import {LayerSyncService} from '../../services/layer-sync.service';
   templateUrl: './layer.component.html',
   styleUrls: ['./layer.component.css']
 })
+
 export class LayerComponent implements OnInit {
 
-  layer: string; 
+  layer: object; 
 
   constructor(private data: LayerSyncService) { }
 
