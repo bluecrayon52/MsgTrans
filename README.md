@@ -18,7 +18,7 @@ An analog signal should be displayed from the modulator to the demodulator using
 For a currently unkown reason, the binary translation of the first string passed in does not get reset to the next string being passed in, therefore it is nessecary to refresh the browser screen before each iteration in order to view the correct binary translation of the message. 
 
 ## Node Modules 
-Several modules where installed via the npm (node project manager).  These module dependancies are not included in this repo, therefore it will be necessary to install them locally to run this application.  
+Several modules where installed via the npm (node project manager).  These module dependancies are not included in this repo, therefore it will be necessary to install them locally to run this application. 
 
 
 

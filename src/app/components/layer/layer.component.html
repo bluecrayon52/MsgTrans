@@ -1,0 +1,23 @@
+<div [ngSwitch]="layer"  class='card'>
+  <div class='card' *ngSwitchCase="'application'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'presentation'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'session'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'transport'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'network'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'data_link'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'physical'">{{layer}}</div>
+
+  <div class='card' *ngSwitchCase="'signal_1'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'signal_2'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'signal_3'">{{layer}}</div>
+
+  <div class='card' *ngSwitchCase="'application2'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'presentation2'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'session2'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'transport2'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'network2'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'data_link2'">{{layer}}</div>
+  <div class='card' *ngSwitchCase="'physical2'">{{layer}}</div>
+  
+  <div class='card' *ngSwitchCase="'default'">{{layer}}</div>
+</div>
