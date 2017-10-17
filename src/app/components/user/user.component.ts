@@ -43,7 +43,8 @@ export class UserComponent implements OnInit {
   // input variables 
   rForm: FormGroup;
   post:any;         // A property for our submitted form
-  binMsg:string = '';  // holder for binary conversion 
+  binMsg:string = '';  // holder for binary conversion
+  msgClosed: boolean; // control form input 
 
   // turn these into objects?
   appmsg: string;
@@ -129,6 +130,8 @@ export class UserComponent implements OnInit {
     
     this.default = this.layer; 
 
+    this.msgClosed = true; 
+
     this.application = {
       name: 'application', 
        message: 'Application Layer'
@@ -156,7 +159,7 @@ export class UserComponent implements OnInit {
 
     this.datalink = {
       name: 'data_link',
-      message: 'Data and Padding',   // TESTING HERE
+      message: 'Data Link Layer',   // TESTING HERE
     };
 
     this.physical = { 
@@ -262,9 +265,9 @@ export class UserComponent implements OnInit {
   }
 
   addPost(post) {
-
-    // reset binary message 
-    this.binMsg = ''; 
+   
+    // control form input ( shut it down)
+    this.msgClosed = false; 
 
     this.message.payload = post.msg;
     this.rForm.reset();
@@ -311,6 +314,8 @@ export class UserComponent implements OnInit {
   }
 
   closeMessage(msg) {
+   this.binMsg = ''; 
+   this.msgClosed = true; 
    msg.shown = false; 
   }
 

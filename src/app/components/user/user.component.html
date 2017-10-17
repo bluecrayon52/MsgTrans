@@ -13,7 +13,8 @@
         <div class="card-header">
 
                 <!-- input reactive form  -->
-                <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+                <div *ngIf ="!msgClosed ; else formInput" class="placeHolder"></div> 
+                <form *ngIf ="msgClosed" class="formInput" [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
                         <input class="msgInput" type="text" formControlName="msg">
                         <input type="submit" class="btn btn-outline-secondary" value="Send"  [disabled]="!rForm.valid">
                 </form>
@@ -27,7 +28,7 @@
             </ng-template>
 
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #a="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popApp)" (mouseleave)="popClose(popApp)">
+        (mouseenter)="popOpen(popApp)" (mouseleave)="popClose(popApp)" (click)="diffLayer(application)">
             Application
         </button>
 
@@ -38,7 +39,7 @@
             </ng-template>
 
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent" #b="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popPres)" (mouseleave)="popClose(popPres)">
+        (mouseenter)="popOpen(popPres)" (mouseleave)="popClose(popPres)" (click)="diffLayer(presentation)">
             Presentation
         </button>
 
@@ -49,7 +50,7 @@
             </ng-template>
 
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent" #c="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popSess)" (mouseleave)="popClose(popSess)">
+        (mouseenter)="popOpen(popSess)" (mouseleave)="popClose(popSess)" (click)="diffLayer(session)">
             Session
         </button>
 
@@ -60,7 +61,7 @@
             </ng-template>
         
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent" #d="ngbPopover" triggers="manual" placement="right" popoverTitle="Segments"
-        (mouseenter)="popOpen(popTrans)" (mouseleave)="popClose(popTrans)">
+        (mouseenter)="popOpen(popTrans)" (mouseleave)="popClose(popTrans)" (click)="diffLayer(transport)">
             Transport
         </button>
 
@@ -71,7 +72,7 @@
             </ng-template>
 
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent" #e="ngbPopover" triggers="manual" placement="right" popoverTitle="Packets"
-        (mouseenter)="popOpen(popNet)" (mouseleave)="popClose(popNet)">
+        (mouseenter)="popOpen(popNet)" (mouseleave)="popClose(popNet)" (click)="diffLayer(network)">
             Network
         </button>
 
@@ -82,7 +83,7 @@
             </ng-template>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent" #f="ngbPopover" triggers="manual" placement="right" popoverTitle="Frames"
-        (mouseenter)="popOpen(popData)" (mouseleave)="popClose(popData)">
+        (mouseenter)="popOpen(popData)" (mouseleave)="popClose(popData)" (click)="diffLayer(datalink)">
             Data Link
         </button>
 
@@ -93,7 +94,7 @@
             </ng-template>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent" #g="ngbPopover" triggers="manual" placement="right" popoverTitle="Bits"
-        (mouseenter)="popOpen(popPhys)" (mouseleave)="popClose(popPhys)">
+        (mouseenter)="popOpen(popPhys)" (mouseleave)="popClose(popPhys)" (click)="diffLayer(physical)">
             Physical
         </button>
     </div>
@@ -126,37 +127,37 @@
         </div>
 
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #l="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popApp2)" (mouseleave)="popClose(popApp2)">
+        (mouseenter)="popOpen(popApp2)" (mouseleave)="popClose(popApp2)" (click)="diffLayer(application2)">
             Application
         </button>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent" #m="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popPres2)" (mouseleave)="popClose(popPres2)">
+        (mouseenter)="popOpen(popPres2)" (mouseleave)="popClose(popPres2)" (click)="diffLayer(presentation2)">
             Presentation
         </button>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent" #n="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popSess2)" (mouseleave)="popClose(popSess2)">
+        (mouseenter)="popOpen(popSess2)" (mouseleave)="popClose(popSess2)" (click)="diffLayer(session2)">
             Session
         </button>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent" #o="ngbPopover" triggers="manual" placement="left" popoverTitle="Segments"
-        (mouseenter)="popOpen(popTrans2)" (mouseleave)="popClose(popTrans2)">
+        (mouseenter)="popOpen(popTrans2)" (mouseleave)="popClose(popTrans2)" (click)="diffLayer(transport2)">
             Transport
          </button>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent" #p="ngbPopover" triggers="manual" placement="left" popoverTitle="Packets"
-        (mouseenter)="popOpen(popNet2)" (mouseleave)="popClose(popNet2)">
+        (mouseenter)="popOpen(popNet2)" (mouseleave)="popClose(popNet2)" (click)="diffLayer(network2)">
             Network
         </button>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent" #q="ngbPopover" triggers="manual" placement="left" popoverTitle="Frames"
-        (mouseenter)="popOpen(popData2)" (mouseleave)="popClose(popData2)">
+        (mouseenter)="popOpen(popData2)" (mouseleave)="popClose(popData2)" (click)="diffLayer(datalink2)">
             Data Link
         </button>
     
         <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent" #r="ngbPopover" triggers="manual" placement="left" popoverTitle="Bits"
-        (mouseenter)="popOpen(popPhys2)" (mouseleave)="popClose(popPhys2)">
+        (mouseenter)="popOpen(popPhys2)" (mouseleave)="popClose(popPhys2)" (click)="diffLayer(physical2)">
             Physical
         </button>
     </div>
