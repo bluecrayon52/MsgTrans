@@ -10,7 +10,7 @@ import { SignalComponent } from './components/signal/signal.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { DataService } from './services/data.service';
-import {LayerSyncService} from './services/layer-sync.service'; 
+import {LayerSyncService} from './services/layer-sync.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule } from '@angular/material';
