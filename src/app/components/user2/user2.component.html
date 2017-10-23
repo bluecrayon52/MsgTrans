@@ -1,3 +1,343 @@
-<p>
-  user2 works!
-</p>
+<!-- Title Card -->
+<div class="card">
+        <div class="title">
+          <h4 class="card-title">Message Transmission Demo 2</h4>
+          <h6 class="card-subtitle mb-2 text-muted">CSC 567-01</h6>
+        </div>
+</div>
+
+<!-- host 2 card group -->
+<div class="card-group">
+     <!-- progress bar three  -->
+     <div class='card'>
+        <div class="card-block">
+            <p class="progressBar">
+                <md-progress-bar *ngIf="progBar2.shown" class='bar' [mode]="barMode"></md-progress-bar>
+            </p>
+        </div>
+    </div>
+    
+    <div class='card'>
+        <div class="card-block">
+            <p class="router" [@myRouter]='router2.state' (mouseenter)="animateRouter(router2)" (mouseleave)="animateRouter(router2)">Router 2</p>
+        </div>
+    </div> 
+    
+    <div class='card'>
+        <div class="card-header">    
+            
+            <!-- message display alert -->
+            <div *ngIf="!message.shown ; else successMsg" class="placeHolder"></div> 
+            <ngb-alert *ngIf="message.shown" class="successMsg" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
+            
+        </div>
+        
+        <ng-template #applicationContent2>
+            <p>
+                <span class="nowrap">{{application2.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent2" #l="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popApp2)" (mouseleave)="popClose(popApp2)" (click)="diffLayer(application2)">
+            Application
+        </button>
+        
+        <ng-template #presentationContent2>
+            <p>
+                <span class="nowrap">{{presentation2.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent2" #m="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popPres2)" (mouseleave)="popClose(popPres2)" (click)="diffLayer(presentation2)">
+            Presentation
+        </button>
+        
+        <ng-template #sessionContent2>
+            <p>
+                <span class="nowrap">{{session2.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent2" #n="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popSess2)" (mouseleave)="popClose(popSess2)" (click)="diffLayer(session2)">
+            Session
+        </button>
+        
+        <ng-template #transportContent2>
+            <p>
+                <span class="nowrap">{{transport2.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent2" #o="ngbPopover" triggers="manual" placement="left" popoverTitle="Segments"
+            (mouseenter)="popOpen(popTrans2)" (mouseleave)="popClose(popTrans2)" (click)="diffLayer(transport2)">
+            Transport
+        </button>
+        
+        <ng-template #networkContent2>
+            <p>
+                <span class="nowrap">{{network2.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent2" #p="ngbPopover" triggers="manual" placement="left" popoverTitle="Packets"
+            (mouseenter)="popOpen(popNet2)" (mouseleave)="popClose(popNet2)" (click)="diffLayer(network2)">
+            Network
+        </button>
+         
+        <ng-template #datalinkContent2>
+            <p>
+                <span class="nowrap">{{datalink2.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent2" #q="ngbPopover" triggers="manual" placement="left" popoverTitle="Frames"
+            (mouseenter)="popOpen(popData2)" (mouseleave)="popClose(popData2)" (click)="diffLayer(datalink2)">
+            Data Link
+        </button>
+        
+        <ng-template #physicalContent2>
+            <p>
+                <span class="nowrap">{{physical2.message}}</span>
+            </p>
+        </ng-template>
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent2" #r="ngbPopover" triggers="manual" placement="left" popoverTitle="Bits"
+            (mouseenter)="popOpen(popPhys2)" (mouseleave)="popClose(popPhys2)" (click)="diffLayer(physical2)">
+            Physical
+        </button>
+    </div>
+</div>
+
+<!-- host1 card group -->
+<div class="card-group">
+    <div class='card'>
+
+        <div class="card-header">
+
+            <!-- input reactive form  -->
+            <div *ngIf ="!msgClosed ; else formInput" class="placeHolder"></div> 
+            
+            <form *ngIf ="msgClosed" class="formInput" [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+                <input class="msgInput" type="text" formControlName="msg">
+                <input type="submit" class="btn btn-outline-secondary" value="Host 2" (click)="setDest('h2')" [disabled]="!rForm.valid">
+                <input type="submit" class="btn btn-outline-secondary" value="Host 3" (click)="setDest('h3')" [disabled]="!rForm.valid">
+            </form>
+
+        </div> 
+        
+        <ng-template #applicationContent>
+            <p>
+            <span class="nowrap">{{application.message}}</span>
+            </p>
+        </ng-template>
+        
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #a="ngbPopover" triggers="mouseenter:mouseleave" placement="right" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popApp)" (mouseleave)="popClose(popApp)" (click)="diffLayer(application)">
+            Application
+        </button>
+        
+        <ng-template #presentationContent>
+            <p>
+            <span class="nowrap">{{presentation.message}}</span>
+            </p>
+        </ng-template>
+        
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent" #b="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popPres)" (mouseleave)="popClose(popPres)" (click)="diffLayer(presentation)">
+            Presentation
+        </button>
+        
+        <ng-template #sessionContent>
+            <p>
+            <span class="nowrap">{{session.message}}</span>
+            </p>
+        </ng-template>
+        
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent" #c="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popSess)" (mouseleave)="popClose(popSess)" (click)="diffLayer(session)">
+            Session
+        </button>
+        
+        <ng-template #transportContent>
+            <p>
+            <span class="nowrap">{{transport.message}}</span>
+            </p>
+        </ng-template>
+                
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent" #d="ngbPopover" triggers="manual" placement="right" popoverTitle="Segments"
+            (mouseenter)="popOpen(popTrans)" (mouseleave)="popClose(popTrans)" (click)="diffLayer(transport)">
+            Transport
+        </button>
+        
+        <ng-template #networkContent>
+            <p>
+            <span class="nowrap">{{network.message}}</span>
+            </p>
+        </ng-template>
+        
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent" #e="ngbPopover" triggers="manual" placement="right" popoverTitle="Packets"
+            (mouseenter)="popOpen(popNet)" (mouseleave)="popClose(popNet)" (click)="diffLayer(network)">
+            Network
+        </button>
+        
+        <ng-template #datalinkContent>
+            <p>
+            <span class="nowrap">{{datalink.message}}</span>
+            </p>
+        </ng-template>
+            
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent" #f="ngbPopover" triggers="manual" placement="right" popoverTitle="Frames"
+            (mouseenter)="popOpen(popData)" (mouseleave)="popClose(popData)" (click)="diffLayer(datalink)">
+            Data Link
+        </button>
+        
+        <ng-template #physicalContent>
+            <p>
+            <span class="nowrap">{{physical.message}}</span>
+            </p>
+        </ng-template>
+            
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent" #g="ngbPopover" triggers="manual" placement="right" popoverTitle="Bits"
+            (mouseenter)="popOpen(popPhys)" (mouseleave)="popClose(popPhys)" (click)="diffLayer(physical)">
+            Physical
+        </button>
+     </div>
+
+    <!-- Router 1 Card -->
+    <div class='card'>
+        <div class="card-block">
+            <p class="router" [@myRouter]='router1.state' (mouseenter)="animateRouter(router1)" (mouseleave)="animateRouter(router1)">Router 1</p>
+        </div>
+    </div> 
+
+     <!-- progress bar 1 Card  -->
+     <div class='card text-center'>
+        <div class="card-block">
+            <p class="progressBar">
+                <md-progress-bar *ngIf="progBar1.shown" class='bar' [mode]="barMode"></md-progress-bar>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- host 3 card group -->
+<div class="card-group">
+
+    <!-- progress bar three  -->
+    <div class='card'>
+        <div class="card-block">
+            <p class="progressBar">
+                <md-progress-bar *ngIf="progBar3.shown" class='bar' [mode]="barMode"></md-progress-bar>
+            </p>
+        </div>
+    </div>
+
+    <div class='card'>
+        <div class="card-block">
+            <p class="router" [@myRouter]='router3.state' (mouseenter)="animateRouter(router3)" (mouseleave)="animateRouter(router3)">Router 3</p>
+        </div>
+    </div> 
+
+    <div class='card'>
+        <div class="card-header">    
+        
+            <!-- message display alert -->
+            <div *ngIf="!message.shown2 ; else successMsg2" class="placeHolder"></div> 
+            <ngb-alert *ngIf="message.shown2" class="successMsg2" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
+        
+        </div>
+        
+        <ng-template #applicationContent3>
+            <p>
+                <span class="nowrap">{{application3.message}}</span>
+            </p>
+        </ng-template>
+            
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent3" #s="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popApp3)" (mouseleave)="popClose(popApp3)" (click)="diffLayer(application3)">
+            Application
+        </button>
+        
+        <ng-template #presentationContent3>
+            <p>
+                <span class="nowrap">{{presentation3.message}}</span>
+            </p>
+        </ng-template>
+            
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent3" #t="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popPres3)" (mouseleave)="popClose(popPres3)" (click)="diffLayer(presentation3)">
+            Presentation
+        </button>
+        
+        <ng-template #sessionContent3>
+            <p>
+                <span class="nowrap">{{session3.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent3" #u="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
+            (mouseenter)="popOpen(popSess3)" (mouseleave)="popClose(popSess3)" (click)="diffLayer(session3)">
+            Session
+        </button>
+        
+        <ng-template #transportContent3>
+            <p>
+                <span class="nowrap">{{transport3.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent3" #v="ngbPopover" triggers="manual" placement="left" popoverTitle="Segments"
+            (mouseenter)="popOpen(popTrans3)" (mouseleave)="popClose(popTrans3)" (click)="diffLayer(transport3)">
+            Transport
+        </button>
+        
+        <ng-template #networkContent3>
+            <p>
+                <span class="nowrap">{{network3.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent3" #w="ngbPopover" triggers="manual" placement="left" popoverTitle="Packets"
+            (mouseenter)="popOpen(popNet3)" (mouseleave)="popClose(popNet3)" (click)="diffLayer(network3)">
+            Network
+        </button>
+        
+        <ng-template #datalinkContent3>
+            <p>
+                <span class="nowrap">{{datalink3.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent3" #x="ngbPopover" triggers="manual" placement="left" popoverTitle="Frames"
+            (mouseenter)="popOpen(popData3)" (mouseleave)="popClose(popData3)" (click)="diffLayer(datalink3)">
+            Data Link
+        </button>
+        
+        <ng-template #physicalContent3>
+            <p>
+                <span class="nowrap">{{physical3.message}}</span>
+            </p>
+        </ng-template>
+
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent3" #y="ngbPopover" triggers="manual" placement="left" popoverTitle="Bits"
+            (mouseenter)="popOpen(popPhys3)" (mouseleave)="popClose(popPhys3)" (click)="diffLayer(physical3)">
+            Physical
+        </button>
+    </div>
+
+</div>
+    
+<!--Signal View -->
+<div *ngIf="!switch" class='card'>
+   <app-signal></app-signal>
+</div>
+<!-- Layer View -->
+<div *ngIf="switch" class='card'>
+    <app-layer></app-layer>
+</div>
+
+  
+
+  

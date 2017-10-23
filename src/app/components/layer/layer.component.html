@@ -25,12 +25,63 @@
       <p>{{layer.message}}</p>
     </div>
 
-    <div class='card' *ngSwitchCase="'data_link'">
-      <p>{{layer.name}}</p>
-      <p>{{layer.message}}</p>
+    <div class='card' *ngSwitchCase="'data_link'">   
+    <div class="card-group" id="lview">
+
+        <div class="card">
+            <div class="card-header">
+              Preamble (7 Bytes)
+            </div>
+            <div> 155555555555 (HEX)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+              SFD (1 Byte)
+            </div>
+            <div> AB (HEX)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+            Destination (6 Bytes)
+            </div>
+            <div> 06:01:02:01:2C:4B (HEX)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+            Source (6 Bytes)
+            </div>
+            <div>4A:30:10:21:1O:1A (HEX)</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+              <!-- number of bytes in the data field -->
+            Length (2 Bytes) 
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+            Data (46 -1500 Bytes) 
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+            <!-- CRC-32 Chapter 10 -->
+            CRC (4 Bytes)
+            </div>
+        </div>
+              
+    </div>
+      <!-- <p>{{layer.name}}</p>
+      <p>{{layer.message}}</p> -->
     </div>
 
-    <div class='card' *ngSwitchCase="'physical'">
+    <div class='card' *ngSwitchCase="'physical'">     
       <p>{{layer.name}}</p>
       <p>{{layer.message}}</p>
     </div>
@@ -69,6 +120,41 @@
       <p>{{layer.name}}</p>
       <p>{{layer.message}}</p>
     </div>
+
+    <div class='card' *ngSwitchCase="'application3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}</p>
+      </div>
+  
+      <div class='card' *ngSwitchCase="'presentation3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}</p>
+      </div>
+  
+      <div class='card' *ngSwitchCase="'session3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}</p>
+      </div>
+  
+      <div class='card' *ngSwitchCase="'transport3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}</p>
+      </div>
+  
+      <div class='card' *ngSwitchCase="'network3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}</p>
+      </div>
+  
+      <div class='card' *ngSwitchCase="'data_link3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}</p>
+      </div>
+  
+      <div class='card' *ngSwitchCase="'physical3'">
+        <p>{{layer.name}}</p>
+        <p>{{layer.message}}</p>
+      </div>
   
     <div class='card' *ngSwitchCase="'default'">
       <p>{{layer.name}}</p>

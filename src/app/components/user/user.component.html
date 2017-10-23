@@ -27,7 +27,7 @@
                 </p>
             </ng-template>
 
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #a="ngbPopover" triggers="manual" placement="right" popoverTitle="Upper Layer Data"
+        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #a="ngbPopover" triggers="mouseenter:mouseleave" placement="right" popoverTitle="Upper Layer Data"
         (mouseenter)="popOpen(popApp)" (mouseleave)="popClose(popApp)" (click)="diffLayer(application)">
             Application
         </button>
