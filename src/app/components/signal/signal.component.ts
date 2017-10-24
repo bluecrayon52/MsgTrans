@@ -105,150 +105,150 @@ export class SignalComponent implements OnInit {
         if(i <=this.width*(17/64)){
         y = Math.sin(x);
         }
-        else if (i > this.width*(17/64) && i <=this.width*(18/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(18/64) &&  i <= this.width*(19/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(19/64) &&  i <= this.width*(20/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(20/64) &&  i <= this.width*(21/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(21/64) &&  i <= this.width*(22/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(22/64) &&  i <= this.width*(23/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(23/64) &&  i <= this.width*(24/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(24/64) &&  i <= this.width*(25/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(25/64) &&  i <= this.width*(26/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(26/64) &&  i <= this.width*(27/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(27/64) &&  i <= this.width*(28/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(28/64) &&  i <= this.width*(29/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(29/64) &&  i <= this.width*(30/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(30/64) &&  i <= this.width*(31/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(31/64) &&  i <= this.width*(32/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(32/64) &&  i <= this.width*(33/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(33/64) &&  i <= this.width*(34/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(34/64) &&  i <= this.width*(35/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(35/64) &&  i <= this.width*(36/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(36/64) &&  i <= this.width*(37/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(37/64) &&  i <= this.width*(38/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(38/64) &&  i <= this.width*(39/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(39/64) &&  i <= this.width*(40/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(40/64) &&  i <= this.width*(41/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(41/64) &&  i <= this.width*(42/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(42/64) &&  i <= this.width*(43/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(43/64) &&  i <= this.width*(44/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(44/64) &&  i <= this.width*(45/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(45/64) &&  i <= this.width*(46/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(46/64) &&  i <= this.width*(47/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(47/64) &&  i <= this.width*(48/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(48/64) &&  i <= this.width*(49/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(49/64) &&  i <= this.width*(50/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(50/64) &&  i <= this.width*(51/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(51/64) &&  i <= this.width*(52/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(52/64) &&  i <= this.width*(53/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(53/64) &&  i <= this.width*(54/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(54/64) &&  i <= this.width*(55/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(55/64) &&  i <= this.width*(56/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(56/64) &&  i <= this.width*(57/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(57/64) &&  i <= this.width*(58/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(58/64) &&  i <= this.width*(59/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(59/64) &&  i <= this.width*(60/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(60/64) &&  i <= this.width*(61/64)){
-          y = Math.sin(4*x); 
-        }
-        else if (i > this.width*(61/64) &&  i <= this.width*(62/64)){
-          y = Math.sin(x); 
-        }
-        else if (i > this.width*(62/64) &&  i <= this.width*(63/64)){
-          y = Math.sin(2*x); 
-        }
-        else if (i > this.width*(63/64) &&  i <= this.width*(64/64)){
-          y = Math.sin(x); 
-        }
-        else {
+        // else if (i > this.width*(17/64) && i <=this.width*(18/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(18/64) &&  i <= this.width*(19/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(19/64) &&  i <= this.width*(20/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(20/64) &&  i <= this.width*(21/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(21/64) &&  i <= this.width*(22/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(22/64) &&  i <= this.width*(23/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(23/64) &&  i <= this.width*(24/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(24/64) &&  i <= this.width*(25/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(25/64) &&  i <= this.width*(26/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(26/64) &&  i <= this.width*(27/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(27/64) &&  i <= this.width*(28/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(28/64) &&  i <= this.width*(29/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(29/64) &&  i <= this.width*(30/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(30/64) &&  i <= this.width*(31/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(31/64) &&  i <= this.width*(32/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(32/64) &&  i <= this.width*(33/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(33/64) &&  i <= this.width*(34/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(34/64) &&  i <= this.width*(35/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(35/64) &&  i <= this.width*(36/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(36/64) &&  i <= this.width*(37/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(37/64) &&  i <= this.width*(38/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(38/64) &&  i <= this.width*(39/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(39/64) &&  i <= this.width*(40/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(40/64) &&  i <= this.width*(41/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(41/64) &&  i <= this.width*(42/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(42/64) &&  i <= this.width*(43/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(43/64) &&  i <= this.width*(44/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(44/64) &&  i <= this.width*(45/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(45/64) &&  i <= this.width*(46/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(46/64) &&  i <= this.width*(47/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(47/64) &&  i <= this.width*(48/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(48/64) &&  i <= this.width*(49/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(49/64) &&  i <= this.width*(50/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(50/64) &&  i <= this.width*(51/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(51/64) &&  i <= this.width*(52/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(52/64) &&  i <= this.width*(53/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(53/64) &&  i <= this.width*(54/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(54/64) &&  i <= this.width*(55/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(55/64) &&  i <= this.width*(56/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(56/64) &&  i <= this.width*(57/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(57/64) &&  i <= this.width*(58/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(58/64) &&  i <= this.width*(59/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(59/64) &&  i <= this.width*(60/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(60/64) &&  i <= this.width*(61/64)){
+        //   y = Math.sin(4*x); 
+        // }
+        // else if (i > this.width*(61/64) &&  i <= this.width*(62/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else if (i > this.width*(62/64) &&  i <= this.width*(63/64)){
+        //   y = Math.sin(2*x); 
+        // }
+        // else if (i > this.width*(63/64) &&  i <= this.width*(64/64)){
+        //   y = Math.sin(x); 
+        // }
+        // else {
         y = Math.sin(x);       
-        }                         
+        // }                         
         this.context.lineTo(i, that.unit * y + that.xAxis);
       }
     }

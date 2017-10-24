@@ -8,4 +8,14 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
  
+ assignment: string;  // a1, a2, a3, or home  
+
+ ngOnInit(){
+ this.assignment = "home"; 
+ }
+ 
+ setAssign(a:string) {
+  this.assignment = a; 
+  } 
 }
+

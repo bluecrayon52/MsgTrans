@@ -1,4 +1,27 @@
 <!-- add home screen with buttons to select version of app -->
 <!-- <app-user></app-user> -->
 <!-- <app-signal></app-signal> -->
-<app-user2></app-user2>
+<!-- <app-user2></app-user2> -->
+ <app-user *ngIf='assignment == "a1"' ></app-user> 
+ <app-user2 *ngIf='assignment == "a2"'></app-user2>
+
+ <div *ngIf='assignment == "home"'>
+    <div class="card">
+        <div class="title">
+          <h4 class="card-title">Message Transmission Demo</h4>
+          <h6 class="card-subtitle mb-2 text-muted">CSC 567-01</h6>
+        </div>
+    </div>
+
+    <div class="card-group">
+        <div class="card"> 
+            <button  id="homeButton" type="button" class="btn btn-outline-secondary" (click)="setAssign('a1')"> Assignment 1 </button>
+        </div>
+        <div class="card">
+            <button  id="homeButton" type="button" class="btn btn-outline-secondary" (click)="setAssign('a2')"> Assignment 2 </button>
+        </div>
+        <div class="card">
+            <button  id="homeButton" type="button" class="btn btn-outline-secondary" (click)="setAssign('a3')"> Assignment 3 </button> 
+        </div>  
+    </div>
+ </div>

@@ -607,7 +607,7 @@ export class User2Component implements OnInit {
       that.diffLayer(that.physical3);
     }
     var thatPhys3 = this.popPhys3; 
-    setTimeout((function (){thatPhys3.open(); physView2();}), 15500);  
+    setTimeout((function (){thatPhys3.open(); physView3();}), 15500);  
     setTimeout((function(){thatPhys3.close()}), 17000);
 
     // Data Link Layer 3
@@ -623,7 +623,7 @@ export class User2Component implements OnInit {
       that.diffLayer(that.network3);
     }
     var thatNet3 = this.popNet3; 
-    setTimeout((function (){thatNet3.open(); netView2();}), 18500); 
+    setTimeout((function (){thatNet3.open(); netView3();}), 18500); 
     setTimeout((function(){thatNet3.close()}), 20000);
 
     // Transport Layer 3

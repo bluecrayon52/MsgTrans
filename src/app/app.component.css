@@ -1,0 +1,13 @@
+#homeButton {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    right: 50%;
+    padding: 20px;
+    margin-top: 200px;
+}
+
+
+.title {
+    padding: 20px;
+  }
