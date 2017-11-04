@@ -4,18 +4,18 @@ import { DataService } from '../../services/data.service';
 import {LayerSyncService} from '../../services/layer-sync.service';
 
 import { trigger, state, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
-import { NgForm } from "@angular/forms/src/forms";
-import {FormBuilder, FormGroup, Validators } from '@angular/forms'; 
-import { NgbPopover } from "@ng-bootstrap/ng-bootstrap";
-import { MdProgressBar } from "@angular/material/material";
+import { NgForm } from '@angular/forms/src/forms';
+import {FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { MdProgressBar } from '@angular/material/material';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
   animations: [
-    
-    // animate the routers 
+
+    // animate the routers
     trigger('myRouter', [
       state('small', style({
         transform: 'scale(1)',
@@ -26,7 +26,7 @@ import { MdProgressBar } from "@angular/material/material";
       transition('small <=> large', animate('100ms ease-in')),
     ]),
 
-    // animate the computers 
+    // animate the computers
     trigger('myComputer', [
       state('small', style({
         transform: 'scale(1)',
@@ -40,11 +40,11 @@ import { MdProgressBar } from "@angular/material/material";
 })
 
 export class UserComponent implements OnInit {
-  // input variables 
+  // input variables
   rForm: FormGroup;
-  post:any;         // A property for our submitted form
-  binMsg:string = '';  // holder for binary conversion
-  msgClosed: boolean; // control form input 
+  post: any;         // A property for our submitted form
+  binMsg = '';  // holder for binary conversion
+  msgClosed: boolean; // control form input
 
   // turn these into objects?
   appmsg: string;
@@ -55,8 +55,8 @@ export class UserComponent implements OnInit {
   datamsg: string;
   physmsg: string;
 
-  layer: object; // keep track of layer iengagement across components 
-  default: object; 
+  layer: object; // keep track of layer iengagement across components
+  default: object;
   application: Layer;
   presentation: Layer;
   session: Layer;
@@ -68,7 +68,7 @@ export class UserComponent implements OnInit {
   signal_1: Layer;
   signal_2: Layer;
   signal_3: Layer;
-  
+
   application2: Layer;
   presentation2: Layer;
   session2: Layer;
@@ -81,9 +81,9 @@ export class UserComponent implements OnInit {
   router2: Router;
   computer1: Computer;
   computer2: Computer;
-  message: Message; 
-  progBar1: Progress; 
-  progBar2: Progress; 
+  message: Message;
+  progBar1: Progress;
+  progBar2: Progress;
   progBar3: Progress;
   progSpin: Progress;
 
@@ -108,15 +108,15 @@ export class UserComponent implements OnInit {
   @ViewChild('q') public popData2: NgbPopover;
   @ViewChild('r') public popPhys2: NgbPopover;
 
-  // progress bar and spinner vars 
+  // progress bar and spinner vars
   color = 'primary';
   spinMode = 'indeterminate';
-  barMode = 'indeterminate'; 
+  barMode = 'indeterminate';
   value = 50;
   bufferValue = 100;
 
 
-  constructor(private fb: FormBuilder, private data: LayerSyncService) { 
+  constructor(private fb: FormBuilder, private data: LayerSyncService) {
 
         this.rForm = fb.group({
           'msg' : [null, Validators.required],
@@ -126,14 +126,14 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit ran ...');
 
-    this.data.currentLayer.subscribe(layer => this.layer = layer) // subscribe to the service 
-    
-    this.default = this.layer; 
+    this.data.currentLayer.subscribe(layer => this.layer = layer); // subscribe to the service
 
-    this.msgClosed = true; 
+    this.default = this.layer;
+
+    this.msgClosed = true;
 
     this.application = {
-      name: 'application', 
+      name: 'application',
        message: 'Application Layer'
     };
 
@@ -162,28 +162,28 @@ export class UserComponent implements OnInit {
       message: 'Data Link Layer',   // TESTING HERE
     };
 
-    this.physical = { 
-      name: 'physical',            
+    this.physical = {
+      name: 'physical',
       message: 'Physical Layer',
     };
 
-    this.signal_1 = { 
-      name: 'signal_1',            
+    this.signal_1 = {
+      name: 'signal_1',
       message: 'Signal One',
     };
 
-    this.signal_2 = { 
-      name: 'signal_2',            
+    this.signal_2 = {
+      name: 'signal_2',
       message: 'Signal Two',
     };
 
-    this.signal_3 = { 
-      name: 'signal_3',            
+    this.signal_3 = {
+      name: 'signal_3',
       message: 'Signal Three',
     };
 
     this.application2 = {
-      name: 'application2', 
+      name: 'application2',
        message: 'Application Layer 2'
     };
 
@@ -212,8 +212,8 @@ export class UserComponent implements OnInit {
       message: 'Data Link Layer 2',   // TESTING HERE
     };
 
-    this.physical2 = { 
-      name: 'physical2',            
+    this.physical2 = {
+      name: 'physical2',
       message: 'Physical Layer 2',
     };
 
@@ -238,72 +238,72 @@ export class UserComponent implements OnInit {
     };
 
     this.message = {
-      payload: '', 
-      shown: false 
+      payload: '',
+      shown: false
     };
 
     this.progBar1 = {
       shown: false
-    }; 
+    };
 
     this.progBar2 = {
-      shown: false 
-    }; 
+      shown: false
+    };
 
     this.progBar3 = {
-      shown: false 
-    }; 
+      shown: false
+    };
 
     this.progSpin = {
-      shown: false 
-    }; 
-    
+      shown: false
+    };
+
   }
 
-  diffLayer(layer:object){
-    this.data.changeLayer(layer)
+  diffLayer(layer: object) {
+    this.data.changeLayer(layer);
   }
 
   addPost(post) {
-   
+
     // control form input ( shut it down)
-    this.msgClosed = false; 
+    this.msgClosed = false;
 
     this.message.payload = post.msg;
     this.rForm.reset();
-    this.convertToBin(); 
-    console.log(this.binMsg);  
-    this.startSequence(); 
+    this.convertToBin();
+    console.log(this.binMsg);
+    this.startSequence();
 
     this.signal_1.message = this.binMsg;
     this.signal_2.message = this.binMsg;
-    this.signal_3.message = this.binMsg; 
+    this.signal_3.message = this.binMsg;
 
-    this.datalink.message = this.binMsg; 
+    this.datalink.message = this.binMsg;
     this.physical.message = this.binMsg;
 
-    this.datalink2.message = this.binMsg; 
+    this.datalink2.message = this.binMsg;
     this.physical2.message = this.binMsg;
 
     this.application.message = this.message.payload;
-    this.presentation.message = this.message.payload; 
-    this.session.message = this.message.payload; 
+    this.presentation.message = this.message.payload;
+    this.session.message = this.message.payload;
     this.transport.message = this.message.payload;
-    this.network.message = this.message.payload; 
+    this.network.message = this.message.payload;
 
     this.application2.message = this.message.payload;
-    this.presentation2.message = this.message.payload; 
-    this.session2.message = this.message.payload; 
+    this.presentation2.message = this.message.payload;
+    this.session2.message = this.message.payload;
     this.transport2.message = this.message.payload;
-    this.network2.message = this.message.payload; 
+    this.network2.message = this.message.payload;
 
   }
 
-  convertToBin() { 
-    for (var i = 0; i < this.message.payload.length; i++) {
-         this.binMsg +="0"+this.message.payload[i].charCodeAt(0).toString(2) + " ";
+  convertToBin() {
+    for (let i = 0; i < this.message.payload.length; i++) {
+         this.binMsg += '0' + this.message.payload[i].charCodeAt(0).toString(2) + ' ';
       }
-  } 
+  }
 
   animateRouter(router) {
     router.state = (router.state === 'small' ? 'large' : 'small');
@@ -314,184 +314,184 @@ export class UserComponent implements OnInit {
   }
 
   closeMessage(msg) {
-   this.binMsg = ''; 
-   this.msgClosed = true; 
-   msg.shown = false; 
+   this.binMsg = '';
+   this.msgClosed = true;
+   msg.shown = false;
   }
 
   popOpen(popup) {
     // if (this.message.shown){
-      popup.open(); 
+      popup.open();
     // }
   }
 
   popClose(popup) {
     // if (this.message.shown){
       popup.close();
-    // } 
+    // }
   }
-  
+
   public startSequence() {
-    console.log("sequence started.....");
+    console.log('sequence started.....');
 
-    // progress spinner on 
-    var thatSpin= this.progSpin; 
-    setTimeout((function (){thatSpin.shown = true; }), 200);  
+    // progress spinner on
+    const thatSpin = this.progSpin;
+    setTimeout((function (){thatSpin.shown = true; }), 200);
 
-    // scope anchor 
-    var that = this; 
+    // scope anchor
+    const that = this;
 
-    // Application Layer 
-    var appView = function(){
+    // Application Layer
+    const appView = function(){
       that.diffLayer(that.application);
-    }
-    var thatApp = this.popApp; 
-    setTimeout((() => {thatApp.open(); appView();}), 500); 
-    setTimeout((function(){thatApp.close()}), 2000);
+    };
+    const thatApp = this.popApp;
+    setTimeout((() => {thatApp.open(); appView(); }), 500);
+    setTimeout((function(){thatApp.close(); }), 2000);
 
-    // Presentation Layer  
-    var presView = function(){
+    // Presentation Layer
+    const presView = function(){
       that.diffLayer(that.presentation);
-    }
-    var thatPres = this.popPres; 
-    setTimeout((function (){thatPres.open(); presView();}), 2000); 
-    setTimeout((function(){thatPres.close()}), 3500);
+    };
+    const thatPres = this.popPres;
+    setTimeout((function (){thatPres.open(); presView(); }), 2000);
+    setTimeout((function(){thatPres.close(); }), 3500);
 
     // Session Layer
-    var sessView = function(){
+    const sessView = function(){
       that.diffLayer(that.session);
-    }
-    var thatSess = this.popSess; 
-    setTimeout((function (){thatSess.open(); sessView();}), 3500); 
-    setTimeout((function(){thatSess.close()}), 5000); 
+    };
+    const thatSess = this.popSess;
+    setTimeout((function (){thatSess.open(); sessView(); }), 3500);
+    setTimeout((function(){thatSess.close(); }), 5000);
 
-    // Transport Layer 
-    var transView = function(){
+    // Transport Layer
+    const transView = function(){
       that.diffLayer(that.transport);
-    }
-    var thatTrans = this.popTrans; 
-    setTimeout((function (){thatTrans.open(); transView();}), 5000); 
-    setTimeout((function(){thatTrans.close()}), 6500);
+    };
+    const thatTrans = this.popTrans;
+    setTimeout((function (){thatTrans.open(); transView(); }), 5000);
+    setTimeout((function(){thatTrans.close(); }), 6500);
 
-    // Network Layer 
-    var netView = function(){
+    // Network Layer
+    const netView = function(){
       that.diffLayer(that.network);
-    }
-    var thatNet = this.popNet; 
-    setTimeout((function (){thatNet.open(); netView();}), 6500); 
-    setTimeout((function(){thatNet.close()}), 8000);
+    };
+    const thatNet = this.popNet;
+    setTimeout((function (){thatNet.open(); netView(); }), 6500);
+    setTimeout((function(){thatNet.close(); }), 8000);
 
-    // Data Link Layer 
-    var dlView = function(){
+    // Data Link Layer
+    const dlView = function(){
       that.diffLayer(that.datalink);
-    }
-    var thatData = this.popData; 
-    setTimeout((function (){thatData.open(); dlView();}), 8000);     
-    setTimeout((function(){thatData.close()}), 9500);
+    };
+    const thatData = this.popData;
+    setTimeout((function (){thatData.open(); dlView(); }), 8000);
+    setTimeout((function(){thatData.close(); }), 9500);
 
-    // Physical Layer 
-    var physView = function(){
+    // Physical Layer
+    const physView = function(){
       that.diffLayer(that.physical);
-    }
-    var thatPhys = this.popPhys; 
-    setTimeout((function (){thatPhys.open(); physView();}), 9500);  
-    setTimeout((function(){thatPhys.close()}), 11000);
+    };
+    const thatPhys = this.popPhys;
+    setTimeout((function (){thatPhys.open(); physView(); }), 9500);
+    setTimeout((function(){thatPhys.close(); }), 11000);
 
-    // progress bar 1 
-    var sigView1 = function(){
+    // progress bar 1
+    const sigView1 = function(){
       that.diffLayer(that.signal_1);
-    }
-    var thatBar1 = this.progBar1; 
-    setTimeout((function (){thatBar1.shown = true; sigView1();}), 11000);  
+    };
+    const thatBar1 = this.progBar1;
+    setTimeout((function (){thatBar1.shown = true; sigView1(); }), 11000);
     setTimeout((function(){thatBar1.shown = false; }), 12500);
 
     // progress bar 2
-    var sigView2 = function(){
+    const sigView2 = function(){
       that.diffLayer(that.signal_2);
-    }
-    var thatBar2 = this.progBar2; 
-    setTimeout((function (){thatBar2.shown = true; sigView2(); }), 12500);  
+    };
+    const thatBar2 = this.progBar2;
+    setTimeout((function (){thatBar2.shown = true; sigView2(); }), 12500);
     setTimeout((function(){thatBar2.shown = false; }), 14000);
 
-    // progress bar 3 
-    var sigView3 = function(){
+    // progress bar 3
+    const sigView3 = function(){
       that.diffLayer(that.signal_3);
-    }
-    var thatBar3 = this.progBar3; 
-    setTimeout((function (){thatBar3.shown = true; sigView3();}), 14000);  
+    };
+    const thatBar3 = this.progBar3;
+    setTimeout((function (){thatBar3.shown = true; sigView3(); }), 14000);
     setTimeout((function(){thatBar3.shown = false; }), 15500);
-  
+
     // Physical Layer 2
-    var physView2 = function(){
+    const physView2 = function(){
       that.diffLayer(that.physical2);
-    }
-    var thatPhys2 = this.popPhys2; 
-    setTimeout((function (){thatPhys2.open(); physView2();}), 15500);  
-    setTimeout((function(){thatPhys2.close()}), 17000);
+    };
+    const thatPhys2 = this.popPhys2;
+    setTimeout((function (){thatPhys2.open(); physView2(); }), 15500);
+    setTimeout((function(){thatPhys2.close(); }), 17000);
 
     // Data Link Layer 2
-    var dlView2 = function(){
+    const dlView2 = function(){
       that.diffLayer(that.datalink2);
-    }
-    var thatData2 = this.popData2; 
-    setTimeout((function (){thatData2.open(); dlView2();}), 17000);     
-    setTimeout((function(){thatData2.close()}), 18500);
+    };
+    const thatData2 = this.popData2;
+    setTimeout((function (){thatData2.open(); dlView2(); }), 17000);
+    setTimeout((function(){thatData2.close(); }), 18500);
 
     // Network Layer 2
-    var netView2 = function(){
+    const netView2 = function(){
       that.diffLayer(that.network2);
-    }
-    var thatNet2 = this.popNet2; 
-    setTimeout((function (){thatNet2.open(); netView2();}), 18500); 
-    setTimeout((function(){thatNet2.close()}), 20000);
+    };
+    const thatNet2 = this.popNet2;
+    setTimeout((function (){thatNet2.open(); netView2(); }), 18500);
+    setTimeout((function(){thatNet2.close(); }), 20000);
 
     // Transport Layer 2
-    var transView2= function(){
+    const transView2 = function(){
       that.diffLayer(that.transport2);
-    }
-    var thatTrans2 = this.popTrans2; 
-    setTimeout((function (){thatTrans2.open(); transView2();}), 20000); 
-    setTimeout((function(){thatTrans2.close()}), 21500);
+    };
+    const thatTrans2 = this.popTrans2;
+    setTimeout((function (){thatTrans2.open(); transView2(); }), 20000);
+    setTimeout((function(){thatTrans2.close(); }), 21500);
 
     // Session Layer 2
-    var sessView2 = function(){
+    const sessView2 = function(){
       that.diffLayer(that.session2);
-    }
-    var thatSess2 = this.popSess2; 
-    setTimeout((function (){thatSess2.open(); sessView2();}), 21500); 
-    setTimeout((function(){thatSess2.close()}), 23000); 
+    };
+    const thatSess2 = this.popSess2;
+    setTimeout((function (){thatSess2.open(); sessView2(); }), 21500);
+    setTimeout((function(){thatSess2.close(); }), 23000);
 
     // Presentation Layer 2
-    var presView2 = function(){
+    const presView2 = function(){
       that.diffLayer(that.presentation2);
-    }
-    var thatPres2 = this.popPres2; 
-    setTimeout((function (){thatPres2.open(); presView2();}), 23000); 
-    setTimeout((function(){thatPres2.close()}), 24500);
+    };
+    const thatPres2 = this.popPres2;
+    setTimeout((function (){thatPres2.open(); presView2(); }), 23000);
+    setTimeout((function(){thatPres2.close(); }), 24500);
 
-    // Application Layer 2 
-    var appView2 = function(){
+    // Application Layer 2
+    const appView2 = function(){
       that.diffLayer(that.application2);
-    }
-    var thatApp2 = this.popApp2; 
-    setTimeout((function (){thatApp2.open(); appView2();}), 24500); 
-    setTimeout((function(){thatApp2.close()}), 26000);
+    };
+    const thatApp2 = this.popApp2;
+    setTimeout((function (){thatApp2.open(); appView2(); }), 24500);
+    setTimeout((function(){thatApp2.close(); }), 26000);
 
-    // Message Recieved 
-    var defaultView = function(){
+    // Message Recieved
+    const defaultView = function(){
       that.diffLayer(that.default);
-    }
-    var thatMsg = this.message; 
-    setTimeout((function (){thatMsg.shown = true; defaultView();}), 26000); 
+    };
+    const thatMsg = this.message;
+    setTimeout((function (){thatMsg.shown = true; defaultView(); }), 26000);
 
-    // progress spinner off 
-    setTimeout((function (){thatSpin.shown = false; }), 26000); 
-  } 
+    // progress spinner off
+    setTimeout((function (){thatSpin.shown = false; }), 26000);
+  }
 
 }
 
 interface Layer {
-  name: string 
+  name: string;
   message: string;
 }
 
@@ -506,15 +506,15 @@ interface Computer {
 }
 
 interface Delay {
-  show: number; 
-  hide: number; 
+  show: number;
+  hide: number;
 }
 
 interface Message {
-  payload: string; 
-  shown: boolean; 
+  payload: string;
+  shown: boolean;
 }
 
-interface Progress { 
-  shown: boolean; 
+interface Progress {
+  shown: boolean;
 }

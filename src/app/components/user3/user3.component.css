@@ -1,0 +1,8 @@
+.title {
+    padding: 20px;
+}
+
+canvas { 
+    border: 1px solid black; 
+    /* background: grey;  */
+}
