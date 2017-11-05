@@ -22,10 +22,36 @@ export class User3Component implements OnInit {
   link11 = 0;
 
   graph: any;
+  solution: any;
+  path: string[];
+
+  xPath: number[];
+  yPath: number[];
 
   constructor() { }
 
   ngOnInit() {
+
+    // init graph edge weights
+    this.graphSet();
+
+    // set up the canvas
+    this.canvas = <HTMLCanvasElement> document.getElementById('graph');
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    this.ctx = this.canvas.getContext('2d');
+
+    // temp for testing
+    // this.draw();
+
+    this.solution = this.dijkstra(this.graph, 'start');
+    this.path = this.solution['finish'];
+    this.setSeq();
+    // this.animateRed();
+    this.animateBlue();
+  }
+
+  graphSet() {
     // init edge weights
     this.link1 = 1 + Math.floor(Math.random() * 7);
     this.link2 = 1 + Math.floor(Math.random() * 7);
@@ -39,97 +65,144 @@ export class User3Component implements OnInit {
     this.link10 = 1 + Math.floor(Math.random() * 7);
     this.link11 = 1 + Math.floor(Math.random() * 7);
 
+    // Test complex weight pattern
+    // this.link1 = 1;
+    // this.link2 = 10;
+    // this.link3 = 10;
+    // this.link4 = 1;
+    // this.link5 = 1;
+    // this.link6 = 1;
+    // this.link7 = 1;
+    // this.link8 = 1;
+    // this.link9 = 10;
+    // this.link10 = 10;
+    // this.link11 = 1;
+
     this.graph = {
       start: {A: this.link1, B: this.link2},
       A: {C: this.link3, E: this.link5},
-      B: {C: this.link4, F: this.link7},
-      C: {A: this.link3, B: this.link4, D: this.link6},
-      D: {C: this.link6, E: this.link8, F: this.link9},
+      B: {C: this.link4, F: this.link7},                // bidirectional from (A, C), (C, A) & (B, C), (C, B)
+      C: {A: this.link3, B: this.link4, D: this.link6}, // bidirectional from (C, D), (D, C)
+      D: {C: this.link6, E: this.link8, F: this.link9}, // bidirectional from (E, D), (D, E) & (F, D), (D, F)
       E: {D: this.link8, finish: this.link10},
-      F: {D: this.link9, finihs: this.link11},
+      F: {D: this.link9, finish: this.link11},
       finish: {}
     };
-    // set up the canvas
-    this.canvas = <HTMLCanvasElement> document.getElementById('graph');
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-    this.ctx = this.canvas.getContext('2d');
 
-    // temp for testing
-    this.animateRed();
   }
 
+// source reference: https://gist.github.com/jpillora/7382441
+// dijkstra solve graph starting at s
+dijkstra(graph, s) {
+  const solutions = {};
+  solutions[s] = [];
+  solutions[s].dist = 0;
 
-  dijkstra() {
-    
+  while (true) {
+    let parent = null;
+    let nearest = null;
+    let dist = Infinity;
+
+    // for each existing solution
+    for (const n in solutions) {
+      if (!solutions[n]) { continue; }
+
+      const ndist = solutions[n].dist;
+      const adj = graph[n];
+
+      // for each of its adjacent nodes...
+      for (const a in adj) {
+        // without a solution already...
+        if (solutions[a]) { continue; }
+        // choose nearest node with lowest *total* cost
+        const d = adj[a] + ndist;
+        if (d < dist) {
+          // reference parent
+          parent = solutions[n];
+          nearest = a;
+          dist = d;
+        }
+      }
+    }
+    // no more solutions
+    if (dist === Infinity) {
+        break;
+    }
+    // extend parent's solution path
+    solutions[nearest] = parent.concat(nearest);
+    // extend parent's cost
+    solutions[nearest].dist = dist;
   }
+  return solutions;
+}
 
+  // draws default layout and random edge weights
   draw() {
     const canvas = this.canvas;
     const ctx = this.ctx;
 
     this.ctx.fillStyle = 'black'; // red
     // Hosts
-    ctx.fillRect(50, 400, 100, 100); // left (H1)
-    ctx.fillRect(1500, 400, 100, 100); // right (H2)
+    ctx.fillRect(100, 400, 100, 100); // left (H1)
+    ctx.fillRect(1450, 400, 100, 100); // right (H2)
 
     // Outside routers
-    ctx.fillRect(200, 400, 100, 100); // left (R1)
-    ctx.fillRect(1350, 400, 100, 100); // right (R8)
+    ctx.fillRect(250, 400, 100, 100); // left (start)
+    ctx.fillRect(1300, 400, 100, 100); // right (finish)
 
     // Top two routers
-    ctx.fillRect(400, 100, 100, 100);  // left (R2)
-    ctx.fillRect(1150, 100, 100, 100); // right (R6)
+    ctx.fillRect(400, 150, 100, 100);  // left (A)
+    ctx.fillRect(1150, 150, 100, 100); // right (E)
 
     // Middle two routers
-    ctx.fillRect(600, 400, 100, 100); // left (R4)
-    ctx.fillRect(950, 400, 100, 100); // right (R5)
+    ctx.fillRect(550, 400, 100, 100); // left (C)
+    ctx.fillRect(1000, 400, 100, 100); // right (D)
 
     // Botton two routers
-    ctx.fillRect(400, 700, 100, 100); // left (R3)
-    ctx.fillRect(1150, 700, 100, 100); // right (R7)
+    ctx.fillRect(400, 650, 100, 100); // left (B)
+    ctx.fillRect(1150, 650, 100, 100); // right (F)
 
     ctx.beginPath();
-    // ctx.strokeStyle = 'rgba()';
-    // H1 to R1
-    ctx.moveTo(150, 450);
-    ctx.lineTo(200, 450);
+
+    // H1 to start
+    ctx.moveTo(200, 450);
+    ctx.lineTo(250, 450);
     ctx.stroke();
 
     // left diamond
     ctx.moveTo(300, 450);
-    ctx.lineTo(450, 200); // R1 to R2
-    ctx.lineTo(600, 450); // R2 to R4
-    ctx.lineTo(450, 700); // R4 to R3
-    ctx.lineTo(300, 450); // R3 to R1
+    ctx.lineTo(450, 200); // start to A
+    ctx.lineTo(600, 450); // A to C
+    ctx.lineTo(450, 700); // C to B
+    ctx.lineTo(300, 450); // B to start
     ctx.stroke();
 
-    // R2 to R6
-    ctx.moveTo(500, 150);
-    ctx.lineTo(1150, 150);
+    // A to E
+    ctx.moveTo(500, 200);
+    ctx.lineTo(1150, 200);
     ctx.stroke();
 
-    // R4 to R5
-    ctx.moveTo(700, 450);
-    ctx.lineTo(950, 450);
+    // C to D
+    ctx.moveTo(650, 450);
+    ctx.lineTo(1000, 450);
     ctx.stroke();
 
-    // R3 to R7
-    ctx.moveTo(500, 750);
-    ctx.lineTo(1150, 750);
+    // B to F
+    ctx.moveTo(500, 700);
+    ctx.lineTo(1150, 700);
     ctx.stroke();
 
     // right diamond
     ctx.moveTo(1050, 450);
-    ctx.lineTo(1200, 200); // R5 to R6
-    ctx.lineTo(1350, 450); // R6 to R8
-    ctx.lineTo(1200, 700); // R8 to R7
-    ctx.lineTo(1050, 450); // R7 to R5
+    ctx.lineTo(1200, 200); // D to E
+    ctx.lineTo(1350, 450); // E to finish
+    ctx.lineTo(1200, 700); // finish to F
+    ctx.lineTo(1050, 450); // F to D
     ctx.stroke();
 
-    // R8 to H2
-    ctx.moveTo(1450, 450);
-    ctx.lineTo(1500, 450);
+    // finish to H2
+    ctx.moveTo(1400, 450);
+    ctx.lineTo(1450, 450);
     ctx.stroke();
 
     // display edge weights
@@ -140,21 +213,119 @@ export class User3Component implements OnInit {
     ctx.fillText(this.link3.toString(), 550, 300);
     ctx.fillText(this.link4.toString(), 550, 600);
 
-    ctx.fillText(this.link5.toString(), 800, 125);
+    ctx.fillText(this.link5.toString(), 800, 175);
     ctx.fillText(this.link6.toString(), 800, 425);
-    ctx.fillText(this.link7.toString(), 800, 725);
+    ctx.fillText(this.link7.toString(), 800, 675);
 
     ctx.fillText(this.link8.toString(), 1100, 300);
     ctx.fillText(this.link9.toString(), 1100, 600);
     ctx.fillText(this.link10.toString(), 1300, 300);
     ctx.fillText(this.link11.toString(), 1300, 600);
   }
+  setSeq() {
+
+    // reset the path arrays
+    this.xPath = [];
+    this.yPath = [];
+
+    // init prev
+    let prev = 'start';
+
+    for (const next of this.path) {
+
+      if (next === 'A') {
+        if (prev === 'start') {
+          this.xPath.push(1);
+          this.yPath.push(-25 / 15);
+        } else if (prev === 'C') {
+          this.xPath.push(-1);
+          this.yPath.push(-25 / 15);
+          }
+
+      } else if (next === 'B') {
+        if (prev === 'start') {
+          this.xPath.push(1);
+          this.yPath.push(25 / 15);
+        } else if (prev === 'C') {
+          this.xPath.push(-1);
+          this.yPath.push(25 / 15);
+          }
+
+      } else if (next === 'C') {
+        if (prev === 'A') {
+          this.xPath.push(1);
+          this.yPath.push(25 / 15);
+        } else if (prev === 'B') {
+          this.xPath.push(1);
+          this.yPath.push(-25 / 15);
+
+        } else if (prev === 'D') {
+          this.xPath.push(-1);
+          this.yPath.push(0);
+          }
+
+      } else if (next === 'D') {
+        if (prev === 'C') {
+          this.xPath.push(1);
+          this.yPath.push(0);
+        } else if (prev === 'E') {
+          this.xPath.push(-1);
+          this.yPath.push(25 / 15);
+        } else if (prev === 'F') {
+          this.xPath.push(-1);
+          this.yPath.push(-25 / 15);
+          }
+
+      } else if (next === 'E') {
+        if (prev === 'A') {
+          this.xPath.push(1);
+          this.yPath.push(0);
+          this.xPath.push(1); // padding
+          this.yPath.push(0);
+          this.xPath.push(1);
+          this.yPath.push(0);
+        } else if (prev === 'D') {
+          this.xPath.push(1);
+          this.yPath.push(-25 / 15);
+          }
+
+      } else if (next === 'F') {
+        if (prev === 'B') {
+          this.xPath.push(1);
+          this.yPath.push(0);
+          this.xPath.push(1); // padding
+          this.yPath.push(0);
+          this.xPath.push(1);
+          this.yPath.push(0);
+        } else if (prev === 'D') {
+          this.xPath.push(1);
+          this.yPath.push(25 / 15);
+          }
+
+      } else if (next === 'finish') {
+        if (prev === 'E') {
+          this.xPath.push(1);
+          this.yPath.push(25 / 15);
+        } else if (prev === 'F') {
+          this.xPath.push(1);
+          this.yPath.push(-25 / 15);
+        }
+
+      }
+      prev = next;
+    }
+    this.xPath.reverse();
+    this.yPath.reverse();
+    console.log('path: ' + this.path);
+    console.log('xPath: ' + this.xPath);
+    console.log('yPath: ' + this.yPath);
+  }
 
   animateRed() {
    const that = this;
-   let x = 100;
+   let x = 150;
    let y = 450;
-   const dx = 1;
+   let dx = 1;
    let dy = 0;
 
    function animateMe() {
@@ -162,12 +333,37 @@ export class User3Component implements OnInit {
     that.ctx.clearRect(0, 0, innerWidth, innerHeight); // clear the canvas
     that.draw();  // draw the default graph
     that.redCircle(x, y); // draw the circle
-    x += dx;
 
-    if (x > 300) {
-      dy = that.fromRouter1();
-      console.log('dy: ' + dy);
+    if (x === 300) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 450) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 600) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 1050) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 1200) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 1350) {
+      dx = 1;
+      dy = 0;
+
+    } else if (x === 1500) {
+      dx = 0;
+      dy = 0;
     }
+
+    x += dx;
     y += dy;
     console.log('Animate Red');
    }
@@ -176,19 +372,48 @@ export class User3Component implements OnInit {
 
   animateBlue() {
     const that = this;
-    let bx = 200;
-    let by = 600;
-    const bdx = 2;
-    const bdy = 1;
+    let x = 150;
+    let y = 450;
+    let dx = 1;
+    let dy = 0;
 
     function animateMe() {
      requestAnimationFrame(animateMe); // infinate loop
      that.ctx.clearRect(0, 0, innerWidth, innerHeight); // clear the canvas
      that.draw();  // draw the default graph
-     that.blueCircle(bx, by); // draw the circle
+     that.blueCircle(x, y); // draw the circle
 
-     bx += bdx;
-     by -= bdy;
+     if (x === 300) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 450) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 600) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 1050) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 1200) {
+      dx = that.xPath.pop();
+      dy = that.yPath.pop();
+
+    } else if (x === 1350) {
+      dx = 1;
+      dy = 0;
+
+    } else if (x === 1500) {
+      dx = 0;
+      dy = 0;
+    }
+
+    x += dx;
+    y += dy;
 
      console.log('Animate Blue');
     }
@@ -217,17 +442,4 @@ export class User3Component implements OnInit {
     this.ctx.fill();
   }
 
-  fromRouter1() {
-    if (this.link1 > this.link2) {
-      return (25 / 15);
-    } else {
-      return (-25 / 15);
-    }
-  }
-
-}
-
-interface Router {
-  pred: number;
-  dist: number;
 }
