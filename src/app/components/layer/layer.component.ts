@@ -9,11 +9,11 @@ import {LayerSyncService} from '../../services/layer-sync.service';
 
 export class LayerComponent implements OnInit {
 
-  layer: object; 
+  layer: object;
 
   constructor(private data: LayerSyncService) { }
 
   ngOnInit() {
-    this.data.currentLayer.subscribe(layer => this.layer = layer)
+    this.data.currentLayer.subscribe(layer => this.layer = layer);
   }
 }

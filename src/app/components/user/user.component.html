@@ -1,14 +1,12 @@
-<!-- Title Card -->
+
 <div class="card">
         <div class="title">
-          <h4 class="card-title">Message Transmission Demo 1</h4>
+          <h4 class="card-title">Message Transmission Demo 2</h4>
           <h6 class="card-subtitle mb-2 text-muted">CSC 567-01</h6>
         </div>
 </div>
 
-<!-- top card group -->
 <div class="card-group">
-
     <!-- left netowork layer card -->
     <div class='card'>
         <div class="card-header">
@@ -100,134 +98,14 @@
         </button>
     </div>
 
-    <!-- middle card -->
-    <div class='card'>
-
-        <!-- progress spinner  -->
-        <div class="card-block">
-                <md-progress-spinner
-                *ngIf="progSpin.shown"
-                class="progressSpin"
-                [color]="color"
-                [mode]="spinMode"
-                [value]="value">
-            </md-progress-spinner>
-        </div>
-
-    </div>
-
-    <!-- right network layer card -->
-    <div class='card'>
-        <div class="card-header">    
-
-            <!-- message display alert -->
-            <div *ngIf="!message.shown ; else successMsg" class="placeHolder">  
-            </div> 
-            <ngb-alert *ngIf="message.shown" class="successMsg" type="success" (close)="closeMessage(message)">{{message.payload}}</ngb-alert>
-
-        </div>
-
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="applicationContent" #l="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popApp2)" (mouseleave)="popClose(popApp2)" (click)="diffLayer(application2)">
-            Application
-        </button>
-    
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="presentationContent" #m="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popPres2)" (mouseleave)="popClose(popPres2)" (click)="diffLayer(presentation2)">
-            Presentation
-        </button>
-    
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="sessionContent" #n="ngbPopover" triggers="manual" placement="left" popoverTitle="Upper Layer Data"
-        (mouseenter)="popOpen(popSess2)" (mouseleave)="popClose(popSess2)" (click)="diffLayer(session2)">
-            Session
-        </button>
-    
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="transportContent" #o="ngbPopover" triggers="manual" placement="left" popoverTitle="Segments"
-        (mouseenter)="popOpen(popTrans2)" (mouseleave)="popClose(popTrans2)" (click)="diffLayer(transport2)">
-            Transport
-         </button>
-    
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="networkContent" #p="ngbPopover" triggers="manual" placement="left" popoverTitle="Packets"
-        (mouseenter)="popOpen(popNet2)" (mouseleave)="popClose(popNet2)" (click)="diffLayer(network2)">
-            Network
-        </button>
-    
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="datalinkContent" #q="ngbPopover" triggers="manual" placement="left" popoverTitle="Frames"
-        (mouseenter)="popOpen(popData2)" (mouseleave)="popClose(popData2)" (click)="diffLayer(datalink2)">
-            Data Link
-        </button>
-    
-        <button type="button" class="btn btn-outline-secondary" [ngbPopover]="physicalContent" #r="ngbPopover" triggers="manual" placement="left" popoverTitle="Bits"
-        (mouseenter)="popOpen(popPhys2)" (mouseleave)="popClose(popPhys2)" (click)="diffLayer(physical2)">
-            Physical
-        </button>
-    </div>
-</div>
-
-<!-- bottom card deck for router and signal  -->
-<div class='card-group'>
-
     <div class='card'>
         <div class="card-block">
-            <p class="computer" [@myComputer]='computer1.state' (mouseenter)="animateComputer(computer1)" (mouseleave)="animateComputer(computer1)">Modulator</p>
+            <p class="card-text">PlaceholderPlaceholderPlaceholderPlaceholderPlaceholderPlaceholderPlaceholder.</p>
         </div>
     </div>
+</div>  
 
-    <!-- progress bar one  -->
-    <div class='card text-center'>
-            <div class="card-block">
-                    <p class="progressBar">
-                        <md-progress-bar *ngIf="progBar1.shown" class='bar' [mode]="barMode"></md-progress-bar>
-                    </p>
-           </div>
-       </div>
-
-    <div class='card'>
-        <div class="card-block" >
-            <p class="router" [@myRouter]='router1.state' (mouseenter)="animateRouter(router1)" (mouseleave)="animateRouter(router1)">Router 1</p>
-        </div>
-    </div> 
-
-    <!-- progress bar two  -->
-    <div class='card'>
-         <div class="card-block">
-                <p class="progressBar">
-                    <md-progress-bar *ngIf="progBar2.shown" class='bar' [mode]="barMode"></md-progress-bar>
-                </p>
-        </div>
-    </div>
-
-    <div class='card'>
-        <div class="card-block">
-                <p class="router" [@myRouter]='router2.state' (mouseenter)="animateRouter(router2)" (mouseleave)="animateRouter(router2)">Router 2</p>
-        </div>
-    </div>
-
-    <!-- progress bar three  -->
-    <div class='card'>
-            <div class="card-block">
-                 <p class="progressBar">
-                    <md-progress-bar *ngIf="progBar3.shown" class='bar' [mode]="barMode"></md-progress-bar>
-                </p>
-           </div>
-       </div>
-
-    <div class='card'>
-            <div class="card-block">
-                    <p class="computer" [@myComputer]='computer2.state' (mouseenter)="animateComputer(computer2)" (mouseleave)="animateComputer(computer2)">Demodulator</p>
-            </div>
-    </div>
-</div>
-
-<!--Signal View -->
-<div *ngIf="progBar1.shown || progBar2.shown || progBar3.shown" class='card'>
-   <app-signal></app-signal>
-</div>
 <!-- Layer View -->
-<div *ngIf="!progBar1.shown && !progBar2.shown && !progBar3.shown" class='card'>
+<div *ngIf="switch" class='card'>
     <app-layer></app-layer>
 </div>
-
-  
-
-  

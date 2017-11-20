@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { LayerSyncService } from '../../services/layer-sync.service';
 
 @Component({
   selector: 'app-user3',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user3.component.css']
 })
 export class User3Component implements OnInit {
+
+  run: boolean;
+  rSet: boolean;
+  signal: boolean;
+
+  layer: any; // keep track of layer engagement across components
+
   canvas: HTMLCanvasElement;
   ctx:  CanvasRenderingContext2D;
 
@@ -38,9 +46,14 @@ export class User3Component implements OnInit {
   xPathB: number[];
   yPathB: number[]; // blue
 
-  constructor() { }
+  constructor(private data: LayerSyncService) { }
 
   ngOnInit() {
+
+    this.run = true;
+    this.rSet = false;
+   // this.signal = false;
+    this.data.currentLayer.subscribe(layer => this.layer = layer); // subscribe to the service
 
     // init graph edge weights
     this.graphSet();
@@ -53,7 +66,7 @@ export class User3Component implements OnInit {
     this.ctx = this.canvas.getContext('2d');
 
     // temp for testing-----------------------------------------
-    // this.draw();
+    this.draw();
 
     // set the path for the red ball
     this.solution = this.dijkstra(this.graph, 'start');
@@ -65,8 +78,24 @@ export class User3Component implements OnInit {
     this.pathB = this.solutionB['finish'];
     this.setSeqB();
 
-    this.animateBalls();
+    // this.animateBalls();
+  }
 
+  reset() {
+    this.signal = true;
+    this.graphSet();
+    this.setWeights();
+    this.draw();
+
+    this.solution = this.dijkstra(this.graph, 'start');
+    this.path = this.solution['finish'];
+    this.setSeq();
+
+    // set the path for the blue ball
+    this.solutionB = this.dijkstra(this.graphB, 'start');
+    this.pathB = this.solutionB['finish'];
+    this.setSeqB();
+    this.animateBalls();
   }
 
   graphSet() {
@@ -414,12 +443,12 @@ dijkstra(graph, s) {
      // reset the path arrays
      this.xPathB = [];
      this.yPathB = [];
- 
+
      // init prev
      let prev = 'start';
- 
+
      for (const next of this.pathB) {
- 
+
        if (next === 'A') {
          if (prev === 'start') {
            this.xPathB.push(this.weightsB[0]);
@@ -428,7 +457,7 @@ dijkstra(graph, s) {
            this.xPathB.push(- this.weightsB[2]);
            this.yPathB.push((-5 / 3) * this.weightsB[2]);
            }
- 
+
        } else if (next === 'B') {
          if (prev === 'start') {
            this.xPathB.push(this.weightsB[1]);
@@ -437,7 +466,7 @@ dijkstra(graph, s) {
            this.xPathB.push(- this.weightsB[3]);
            this.yPathB.push((5 / 3) * this.weightsB[3]);
            }
- 
+
        } else if (next === 'C') {
          if (prev === 'A') {
            this.xPathB.push(this.weightsB[2]);
@@ -445,12 +474,12 @@ dijkstra(graph, s) {
          } else if (prev === 'B') {
            this.xPathB.push(this.weightsB[3]);
            this.yPathB.push((-5 / 3) * this.weightsB[3]);
- 
+
          } else if (prev === 'D') {
            this.xPathB.push(- this.weightsB[5]);
            this.yPathB.push(0);
            }
- 
+
        } else if (next === 'D') {
          if (prev === 'C') {
            this.xPathB.push(this.weightsB[5]);
@@ -462,7 +491,7 @@ dijkstra(graph, s) {
            this.xPathB.push(- this.weightsB[8]);
            this.yPathB.push((-5 / 3) * this.weightsB[8]);
            }
- 
+
        } else if (next === 'E') {
          if (prev === 'A') {
            this.xPathB.push(this.weightsB[4]);
@@ -475,7 +504,7 @@ dijkstra(graph, s) {
            this.xPathB.push(this.weightsB[7]);
            this.yPathB.push((-5 / 3) * this.weightsB[7]);
            }
- 
+
        } else if (next === 'F') {
          if (prev === 'B') {
            this.xPathB.push(this.weightsB[6]);
@@ -488,7 +517,7 @@ dijkstra(graph, s) {
            this.xPathB.push(this.weightsB[8]);
            this.yPathB.push((5 / 3) * this.weightsB[8]);
            }
- 
+
        } else if (next === 'finish') {
          if (prev === 'E') {
            this.xPathB.push(this.weightsB[9]);
@@ -497,7 +526,7 @@ dijkstra(graph, s) {
            this.xPathB.push(this.weightsB[10]);
            this.yPathB.push((-5 / 3) * this.weightsB[10]);
          }
- 
+
        }
        prev = next;
      }
@@ -507,6 +536,9 @@ dijkstra(graph, s) {
 
   animateBalls() {
    const that = this;
+   that.run = false;
+   that.rSet = false;
+   that.signal = true;
    // red circle vars
    let x = 150;
    let y = 450;
@@ -589,6 +621,11 @@ dijkstra(graph, s) {
       dyB = 0;
     }
 
+    if (x === 1500 && xB === 1500) {
+      that.rSet = true;
+      that.signal = false;
+    }
+
     xB += dxB;
     yB += dyB;
    }
@@ -617,4 +654,9 @@ dijkstra(graph, s) {
     this.ctx.fill();
   }
 
+}
+
+interface Layer {
+  name: string;
+  message: string;
 }

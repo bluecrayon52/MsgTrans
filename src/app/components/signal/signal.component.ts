@@ -30,7 +30,7 @@ export class SignalComponent implements OnInit {
     this.data.currentLayer.subscribe(layer => this.layer = layer);
     this.canvas = <HTMLCanvasElement> document.getElementById('sineCanvas');
     this.unit = 100;  // zoom
-    this.canvas.width = 8000;  // wavelength (inverse)
+    this.canvas.width = window.innerWidth;  // wavelength (inverse)
     this.canvas.height = 300; // amplitude (inverse)
 
     this.context = this.canvas.getContext('2d');
@@ -41,8 +41,8 @@ export class SignalComponent implements OnInit {
     this.height = this.canvas.height;
     this.width = this.canvas.width;
 
-    this.xAxis = Math.floor(this.height / 2);
-    this.yAxis = Math.floor(this.width / 4);
+    this.xAxis = Math.floor(this.height / 2);   // start in middle
+    this.yAxis = 0;  // start at begining
 
     this.context.save();
     this.draw();

@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
 import { User2Component } from './components/user2/user2.component';
 import { User3Component } from './components/user3/user3.component';
+import { MasterComponent } from './components/master/master.component';
 
 import { SignalComponent } from './components/signal/signal.component';
 import { LayerComponent } from './components/layer/layer.component';
@@ -16,8 +17,7 @@ import { DataService } from './services/data.service';
 import {LayerSyncService} from './services/layer-sync.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule } from '@angular/material';
-
+import {MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdSidenavModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import {MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerMod
     User2Component,
     User3Component,
     SignalComponent,
-    LayerComponent
+    LayerComponent,
+    MasterComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +36,9 @@ import {MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerMod
     HttpModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
-    [MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule] // Material Imports
+    [MdButtonModule, MdInputModule, MdProgressBarModule, MdProgressSpinnerModule, MdSidenavModule] // Material Imports
   ],
   providers: [DataService, LayerSyncService],
-  bootstrap: [AppComponent, UserComponent, User2Component, User3Component, SignalComponent]
+  bootstrap: [AppComponent, UserComponent, User2Component, User3Component, SignalComponent, MasterComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,6 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
 
- assignment: string;  // a1, a2, a3, or home
+ constructor() {}
 
- // tslint:disable-next-line:use-life-cycle-interface
- ngOnInit() {
- this.assignment = 'home';
- }
-
- setAssign(a: string) {
-  this.assignment = a;
-  }
 }
-

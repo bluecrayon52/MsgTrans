@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="title">
+    <h4 class="card-title">Message Transmission Demo 3</h4>
+    <h6 class="card-subtitle mb-2 text-muted">CSC 567-01</h6>
+  </div>
+</div>
+
+<md-sidenav-container class="sidenav-container">
+  
+  <!-- Left SideNav -->
+  <md-sidenav #sidenav class="sidenav" (mouseleave)="sidenav.close()" >
+    <app-user (allDone)="queNext($event)"></app-user>
+  </md-sidenav>
+
+  <!-- Right SideNav -->
+  <md-sidenav #sidenav2 class="sidenav2" (mouseleave)="sidenav2.close()"  align="end">
+    <app-user2></app-user2>
+  </md-sidenav>
+
+  <div class="sidenav-trigger" (mouseenter)="sidenav.open()"></div>
+  <div class="sidenav-trigger2" (mouseenter)="sidenav2.open()"></div>
+
+  <app-user3></app-user3>    
+
+</md-sidenav-container>
+
+<!-- <app-user></app-user> -->
+
+<!-- <app-user2></app-user2> -->
+
+<!--Signal View -->
+<!-- <div *ngIf="!switch" class='card'>
+<app-signal></app-signal>
+</div> -->
+<!-- Layer View -->
+<!-- <div *ngIf="switch" class='card'>
+ <app-layer></app-layer>
+</div> -->
