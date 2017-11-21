@@ -7,9 +7,6 @@ export class LayerSyncService {
   private layerSource = new  BehaviorSubject<Object>({name: 'default', message: 'none'});
   currentLayer = this.layerSource.asObservable();
 
-  private whosTurn = new BehaviorSubject(1);
-  yourTurn = this.whosTurn.asObservable();
-
   constructor() { }
 
   changeLayer(layer: Object) {

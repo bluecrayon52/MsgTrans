@@ -64,3 +64,12 @@
   .nowrap {
     white-space: pre ;
   }
+
+  #rightHost {
+    width: 40rem;
+  }
+
+  #popoverTitle{
+    color: black;
+  }
+

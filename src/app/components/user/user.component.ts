@@ -37,6 +37,7 @@ export class UserComponent implements OnInit {
   datalink: Layer;
   physical: Layer;
 
+  @Output() allDone = new EventEmitter();
 
   @ViewChild('a') public popApp: NgbPopover;
   @ViewChild('b') public popPres: NgbPopover;
@@ -55,7 +56,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     console.log('ngOnInit ran ...');
-
+    // this.allDone.emit();
     this.switch = true; // default layer details
 
     this.data.currentLayer.subscribe(layer => this.layer = layer); // subscribe to the service
@@ -153,6 +154,7 @@ export class UserComponent implements OnInit {
 
   public startSequence() {
     console.log('sequence started.....');
+    this.allDone.emit();
     // scope anchor
     const that = this;
 
@@ -212,6 +214,7 @@ export class UserComponent implements OnInit {
 
     const finish = function(){
       console.log('start ball animation');
+       that.allDone.emit();
       that.diffLayer(that.application);
     };
 

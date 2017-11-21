@@ -1,5 +1,7 @@
+<!--///////////////////////////////////////// Host Stack  ///////////////////////////////////////////////////-->
 <div [ngSwitch]="layer.name"  class='card'>
 
+<!--///////////////////////////////////////// Application Layer  ///////////////////////////////////////////////////-->  
     <div class='card' *ngSwitchCase="'application'">
       <div class="card-group" id="lview">
         <div class="card">
@@ -9,6 +11,7 @@
       </div>
     </div>
 
+<!--///////////////////////////////////////// Presentation Layer  ///////////////////////////////////////////////////-->
     <div class='card' *ngSwitchCase="'presentation'">
       <div class="card-group" id="lview">
         <div class="card">
@@ -18,6 +21,7 @@
       </div>
     </div>
 
+<!--///////////////////////////////////////// Session Layer  ///////////////////////////////////////////////////-->
     <div class='card' *ngSwitchCase="'session'">
       <div class="card-group" id="lview">
         <div class="card">
@@ -27,6 +31,7 @@
       </div>
     </div>
 
+<!--///////////////////////////////////////// Transport Stack  ///////////////////////////////////////////////////-->
     <div class='card' *ngSwitchCase="'transport'">
       <div class="card-group" id="lview">
         <div class="card">
@@ -36,6 +41,7 @@
       </div>
     </div>
 
+<!--///////////////////////////////////////// Network Layer  ///////////////////////////////////////////////////-->
     <div class='card' *ngSwitchCase="'network'">
       <div class="card-group" id="lview">
           <div class="card">
@@ -45,6 +51,7 @@
       </div>
     </div>
 
+<!--///////////////////////////////////////// Data Link Layer  ///////////////////////////////////////////////////-->
     <div class='card' *ngSwitchCase="'data_link'">   
     <div class="card-group" id="lview">
 
@@ -101,6 +108,7 @@
       <p>{{layer.message}}</p> -->
     </div>
 
+<!--///////////////////////////////////////// Physical Layer  ///////////////////////////////////////////////////-->
     <div class='card' *ngSwitchCase="'physical'">     
       <div class="card-group" id="lview">
         <div class="card">
@@ -109,6 +117,9 @@
         </div>
       </div>
     </div>
+
+
+<!--///////////////////////////////////////// Host Stack 2  ///////////////////////////////////////////////////-->
 
     <div class='card' *ngSwitchCase="'application2'">
       <div class="card-group" id="lview">

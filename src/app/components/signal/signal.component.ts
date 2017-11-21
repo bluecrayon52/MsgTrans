@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import {LayerSyncService} from '../../services/layer-sync.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-signal',
@@ -10,6 +11,8 @@ import {LayerSyncService} from '../../services/layer-sync.service';
 export class SignalComponent implements OnInit {
 
   layer: object;
+  x_val: number;
+  xB_val: number;
   unit: number; // amplitude
   canvas: HTMLCanvasElement;
   context:  CanvasRenderingContext2D;
@@ -22,12 +25,15 @@ export class SignalComponent implements OnInit {
   modTemp = 1;
   modBool = true;
 
-  constructor(private data: LayerSyncService) {
+  constructor(private data: LayerSyncService, private xes: DataService) {
 
   }
 
   ngOnInit() {
     this.data.currentLayer.subscribe(layer => this.layer = layer);
+    this.xes.x_value.subscribe(value => this.x_val = value);
+    this.xes.xB_value.subscribe(value => this.xB_val = value);
+
     this.canvas = <HTMLCanvasElement> document.getElementById('sineCanvas');
     this.unit = 100;  // zoom
     this.canvas.width = window.innerWidth;  // wavelength (inverse)

@@ -1,5 +1,4 @@
-import { AfterViewInit, ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnChanges, SimpleChange } from '@angular/core';
 import { UserComponent } from '../user/user.component';
 
 @Component({
@@ -8,8 +7,8 @@ import { UserComponent } from '../user/user.component';
   styleUrls: ['./master.component.css']
 })
 export class MasterComponent {
-  
-  queNext(dud: boolean) {
+
+  public queNext(dud: boolean) {
     console.log('user is done!');
    }
 

@@ -1,15 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class DataService {
 
-  constructor(public http: Http) {
-    console.log('Data service connected...');
+  private xValue = new  BehaviorSubject<number>(0);
+  x_value = this.xValue.asObservable();
+
+  private xBValue = new  BehaviorSubject<number>(0);
+  xB_value = this.xBValue.asObservable();
+
+  constructor() {
   }
 
-  getPosts() {
+  getxValue() {
+    return this.xValue.getValue();
+  }
 
+  changexValue(x: number) {
+    this.xValue.next(x);
+  }
+
+  getxBValue() {
+    return this.xValue.getValue();
+  }
+
+  changexBValue(xB: number) {
+    this.xBValue.next(xB);
   }
 
 }
