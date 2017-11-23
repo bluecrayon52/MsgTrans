@@ -1,4 +1,7 @@
-<canvas id="graph"></canvas>
-<button *ngIf ="run" type="submit" class="btn btn-outline-secondary" (click)="animateBalls()">Run</button>
-<button *ngIf ="rSet" type="submit" class="btn btn-outline-secondary" (click)="reset()">Re-Run</button>
+<div class="canvas-container">
+    <canvas id="graph"></canvas>
+    <button *ngIf ="run" type="submit" id="runButton" class="btn btn-outline-secondary" (click)="animateBalls()">Run</button>
+    <button *ngIf ="rSet" type="submit" id="re-runButton" class="btn btn-outline-secondary" (click)="reset()">Re-Run</button>
+</div>
+
 <!-- <app-signal *ngIf ="signal"></app-signal> -->
